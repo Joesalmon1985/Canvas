@@ -20,6 +20,8 @@
 -- SQLite version 3.7.17 2013-05-20 00:56:22
 -- Enter ".help" for instructions
 -- Enter SQL statements terminated with a ";"
+-- 
+-- 
 --
 DROP TABLE councilfull; 
 DROP TABLE council01;
@@ -34,7 +36,7 @@ DROP TABLE council09;
 DROP TABLE council10;
 DROP TABLE council11;
 DROP TABLE council12;
-DROP TABLE OLD;
+DROP TABLE old;
 drop table members;
 
 .mode csv
@@ -78,36 +80,36 @@ CREATE TABLE councilfullupdated(
   "intent" TEXT,
   "surveyn" TEXT,
   "knocked" TEXT
-  "other" TEXT,
-  "other" TEXT
+  "other1" TEXT,
+  "other2" TEXT,
+  "remove"
 );
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council01;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council01 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council02;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council02 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council03;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council03 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council04;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council04 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council05;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council05 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council06;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council06 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council07;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council07 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council08;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council08 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council09;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council09 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council10;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council10 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council11;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council11 where remove is not 'D';
 
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from council12;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from council12  where remove is not 'D';
 
-
-insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7) select pd,eno,firstnames,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7 from councilfull;
+insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from councilfull where remove is not 'D';
 
 -- These lines create a new field called street.
 
@@ -316,6 +318,35 @@ UPDATE councilfullupdated SET street = 'NORTH GRANGE MOUNT' WHERE fulladdress GL
 UPDATE councilfullupdated SET street = 'NORTH GRANGE MEWS' WHERE fulladdress GLOB '*NORTH GRANGE MEWS*';
 UPDATE councilfullupdated SET street = 'LAUREL BANK COURT' WHERE fulladdress GLOB '*LAUREL BANK COURT*';
 
+UPDATE councilfullupdated SET street = 'LAUREL BANK COURT' WHERE fulladdress GLOB '*LAUREL BANK COURT*';
+
+drop table toremove;
+CREATE TABLE toremove(
+  "pd" TEXT,
+  "eno" TEXT,
+  "firstname" TEXT,
+  "surname" TEXT,
+  "fulladdress" TEXT,
+  "street" TEXT,
+  "address_1" TEXT,
+  "address_2" TEXT,
+  "address_3" TEXT,
+  "address_4" TEXT,
+  "address_5" TEXT,
+  "address_6" TEXT,
+  "address_7" TEXT,
+  "remove" text
+);
+
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council02 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council03 where remove is 'D';
+
+
+UPDATE toremove SET remove = 'remove';
 
 
 drop table draftfreshdata;
@@ -366,12 +397,14 @@ update members set partymember = 'yes';
 
 
 
-insert into draftfreshdata (pd,eno,firstname,surname,fulladdress,street,address_1,address_2,address_3,address_4,address_5,address_6,address_7,v12,v14,green,intent,surveyn,knocked,other1,other2,yearmovedin,priorres) select councilfullupdated.pd, councilfullupdated.eno, councilfullupdated.firstname, councilfullupdated.surname, councilfullupdated.fulladdress, councilfullupdated.street, councilfullupdated.address_1, councilfullupdated.address_2,councilfullupdated.address_3,councilfullupdated.address_4,councilfullupdated.address_5,councilfullupdated.address_6,councilfullupdated.address_7,
-old.v12, old.v14, old.green, old.intent, old.surveyn, old.knocked, old.other1, old.other2, old.yearmovedin, old.priorres from councilfullupdated left outer join old on councilfullupdated.firstname = old.firstname and councilfullupdated.surname = old.surname and councilfullupdated.address_1 = old.address_1;
+insert into draftfreshdata (pd,eno,firstname,surname,fulladdress,street,address_1,address_2,address_3,address_4,address_5,address_6,address_7,v12,v14,green,intent,surveyn,knocked,other1,other2,yearmovedin,priorres) 
+select councilfullupdated.pd, councilfullupdated.eno, councilfullupdated.firstname, councilfullupdated.surname, councilfullupdated.fulladdress, councilfullupdated.street, councilfullupdated.address_1, councilfullupdated.address_2,councilfullupdated.address_3,councilfullupdated.address_4,councilfullupdated.address_5,councilfullupdated.address_6,councilfullupdated.address_7,
+old.v12, old.v14, old.green, old.intent, old.surveyn, old.knocked, old.other1, old.other2, old.yearmovedin, old.priorres 
+from councilfullupdated 
+left outer join old on councilfullupdated.firstname = old.firstname and councilfullupdated.surname = old.surname and councilfullupdated.address_1 = old.address_1;
 
 update draftfreshdata set yearmovedin = '2015' where priorres is not 'yes';
 update draftfreshdata set priorres = 'no' where yearmovedin is '2015'; 
-
 
 drop table streetmembers;
 CREATE TABLE streetmembers(
@@ -392,6 +425,39 @@ insert into streetmembers (FirstName, LastName, partymember, street) select draf
 insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_2;
 
 insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_1;
+
+drop table cleandata;
+CREATE TABLE cleandata(
+  "pd" TEXT,
+  "eno" TEXT,
+  "firstname" TEXT,
+  "surname" TEXT,
+  "fulladdress" TEXT,
+  "street" TEXT,
+  "address_1" TEXT,
+  "address_2" TEXT,
+  "address_3" TEXT,
+  "address_4" TEXT,
+  "address_5" TEXT,
+  "address_6" TEXT,
+  "address_7" TEXT,
+  "priorres" TEXT,
+  "v12" TEXT,
+  "v14" TEXT,
+  "green" TEXT,
+  "intent" TEXT,
+  "surveyn" TEXT,
+  "yearmovedin" TEXT,
+  "knocked" TEXT,
+  "other1" TEXT,
+  "other2" TEXT,
+  "partymember" TEXT,
+  "remove"
+);
+
+insert into cleandata (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, priorres, v12, v14, green, intent, surveyn, knocked, other1, other2, yearmovedin, remove) 
+select draftfreshdata.pd, draftfreshdata.eno, draftfreshdata.firstname, draftfreshdata.surname, draftfreshdata.fulladdress, draftfreshdata.street, draftfreshdata.address_1, draftfreshdata.address_2, draftfreshdata.address_3, draftfreshdata.address_4, draftfreshdata.address_5, draftfreshdata.address_6, draftfreshdata.address_7, draftfreshdata.priorres, draftfreshdata.v12, draftfreshdata.v14, draftfreshdata.green, draftfreshdata.intent, draftfreshdata.surveyn, draftfreshdata.knocked, draftfreshdata.other1, draftfreshdata.other2, draftfreshdata.yearmovedin, toremove.remove
+from draftfreshdata left outer join toremove on draftfreshdata.firstname = toremove.firstname and draftfreshdata.surname = toremove.surname and draftfreshdata.address_1 = toremove.address_1;
 
 drop table freshdata;
 CREATE TABLE freshdata(
@@ -418,14 +484,13 @@ CREATE TABLE freshdata(
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
-  "partymember" TEXT
+  "partymember" TEXT,
+  "remove"
 );
 
-insert into freshdata (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, priorres, v12, v14, green, intent, surveyn, knocked, other1, other2, yearmovedin, partymember) 
-select draftfreshdata.pd, draftfreshdata.eno, draftfreshdata.firstname, draftfreshdata.surname, draftfreshdata.fulladdress, draftfreshdata.street, draftfreshdata.address_1, draftfreshdata.address_2, draftfreshdata.address_3, draftfreshdata.address_4, draftfreshdata.address_5, draftfreshdata.address_6, draftfreshdata.address_7, draftfreshdata.priorres, draftfreshdata.v12, draftfreshdata.v14, draftfreshdata.green, draftfreshdata.intent, draftfreshdata.surveyn, draftfreshdata.knocked, draftfreshdata.other1, draftfreshdata.other2, draftfreshdata.yearmovedin, streetmembers.partymember 
-from draftfreshdata left outer join streetmembers on draftfreshdata.firstname = streetmembers.FirstName and draftfreshdata.surname = streetmembers.Lastname and draftfreshdata.street = streetmembers.street;
-
-
+insert into freshdata (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, priorres, v12, v14, green, intent, surveyn, knocked, other1, other2, yearmovedin, partymember, remove) 
+select cleandata.pd, cleandata.eno, cleandata.firstname, cleandata.surname, cleandata.fulladdress, cleandata.street, cleandata.address_1, cleandata.address_2, cleandata.address_3, cleandata.address_4, cleandata.address_5, cleandata.address_6, cleandata.address_7, cleandata.priorres, cleandata.v12, cleandata.v14, cleandata.green, cleandata.intent, cleandata.surveyn, cleandata.knocked, cleandata.other1, cleandata.other2, cleandata.yearmovedin, streetmembers.partymember, cleandata.remove
+from cleandata left outer join streetmembers on cleandata.firstname = streetmembers.FirstName and cleandata.surname = streetmembers.Lastname and cleandata.street = streetmembers.street;
 
 drop table streetdatares;
 drop table streetdatav14;
