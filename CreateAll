@@ -1,28 +1,6 @@
--- This file contains SQL statements to create the TABLEs used to hold electoral
--- roll data. 
---
--- It is intended to be read by sqlite3
--- 
--- Before running this program, rename the most recent complete .csv copy of the register to a councilfull.csv
--- rename any monthly updates to files called council01-12.csv corresponding to the month they were sent.
--- 
--- The headings in these tables should all be in lowercase with no spaces, as in the csv file called exampleheadings.csv
---
--- If you already have a spreadsheet of canvassing data rename this to old.csv. The data within this spreadsheet must have address data in the
--- same format as the electoral register, and information such as intention and likely hood to vote green as in the file exampledata.csv
--- 
--- Finally if you have access to the members database please create a report and rename it members.csv, making sure there are no spaces in the 
--- headings of the columns for FirstName, LastName and PostCode.
---
--- Once you run createall.sql this will create a number of new  .csv files using combinations of this data.
---
--- $ sqlite3 draftfreshdata.sqlite
--- SQLite version 3.7.17 2013-05-20 00:56:22
--- Enter ".help" for instructions
--- Enter SQL statements terminated with a ";"
--- 
--- 
---
+-- these lines create a CSV file called uptodateregister.csv this will contain all the data from the electoral register, with duplicates removed, and people who have left the ward deleted.
+
+
 DROP TABLE councilfull; 
 DROP TABLE council01;
 DROP TABLE council02; 
@@ -36,8 +14,6 @@ DROP TABLE council09;
 DROP TABLE council10;
 DROP TABLE council11;
 DROP TABLE council12;
-DROP TABLE old;
-drop table members;
 
 .mode csv
 .import councilfull.csv councilfull
@@ -53,8 +29,6 @@ drop table members;
 .import council10.csv council10
 .import council11.csv council11
 .import council12.csv council12
-.import old.csv old
-.import members.csv members
 
 drop table councilfullupdated;
 
@@ -340,17 +314,116 @@ CREATE TABLE toremove(
 
 
 insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council01 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
 from council02 where remove is 'D';
 
 insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
 from council03 where remove is 'D';
 
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council04 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council05 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council06 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council07 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council08 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council09 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council10 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council11 where remove is 'D';
+
+insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+from council12 where remove is 'D';
+
 
 UPDATE toremove SET remove = 'remove';
 
+drop table councilremovedupdated;
+CREATE TABLE councilremovedupdated(
+  "pd" TEXT,
+  "eno" TEXT,
+  "firstname" TEXT,
+  "surname" TEXT,
+  "fulladdress" TEXT,
+  "street" TEXT,
+  "address_1" TEXT,
+  "address_2" TEXT,
+  "address_3" TEXT,
+  "address_4" TEXT,
+  "address_5" TEXT,
+  "address_6" TEXT,
+  "address_7" TEXT,
+  "v12" TEXT,
+  "v14" TEXT,
+  "green" TEXT,
+  "intent" TEXT,
+  "surveyn" TEXT,
+  "knocked" TEXT
+  "other1" TEXT,
+  "other2" TEXT,
+  "remove"
+);
 
-drop table draftfreshdata;
-CREATE TABLE draftfreshdata(
+insert into councilremovedupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, remove) 
+select 
+councilfullupdated.pd, councilfullupdated.eno, councilfullupdated.firstname, councilfullupdated.surname, councilfullupdated.fulladdress, councilfullupdated.street, councilfullupdated.address_1, councilfullupdated.address_2, councilfullupdated.address_3, councilfullupdated.address_4, councilfullupdated.address_5, councilfullupdated.address_6, councilfullupdated.address_7, toremove.remove from councilfullupdated left outer join toremove on councilfullupdated.firstname = toremove.firstname and councilfullupdated.surname = toremove.surname and councilfullupdated.address_1 = toremove.address_1;
+
+drop table councilupdated;
+CREATE TABLE councilupdated(
+  "pd" TEXT,
+  "eno" TEXT,
+  "firstname" TEXT,
+  "surname" TEXT,
+  "fulladdress" TEXT,
+  "street" TEXT,
+  "address_1" TEXT,
+  "address_2" TEXT,
+  "address_3" TEXT,
+  "address_4" TEXT,
+  "address_5" TEXT,
+  "address_6" TEXT,
+  "address_7" TEXT,
+  "v12" TEXT,
+  "v14" TEXT,
+  "green" TEXT,
+  "intent" TEXT,
+  "surveyn" TEXT,
+  "knocked" TEXT
+  "other1" TEXT,
+  "other2" TEXT,
+  "remove"
+);
+
+insert into councilupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7) 
+select pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7 from councilremovedupdated where remove is not 'remove';
+
+delete from councilupdated where rowid not in 
+(select min(rowid) from councilupdated group by firstname, surname, address_1);
+
+.headers on
+.output uptodateregister.csv
+select * from councilupdated;
+.output stdout
+
+
+-- these lines wil create a table called 1freshdata, which contains data from prevoius canvasing, and the members database
+
+drop table freshdata1;
+CREATE TABLE freshdata1(
   "pd" TEXT,
   "eno" TEXT,
   "firstname" TEXT,
@@ -377,6 +450,9 @@ CREATE TABLE draftfreshdata(
   "partymember" TEXT
 );
 
+.mode csv
+drop table old;
+.import old.csv old
 alter table old add column v12;
 alter table old add column v14;
 alter table old add column green;
@@ -390,21 +466,28 @@ alter table old add column priorres;
 alter table old add column partymember;
 alter table members add column partymember;
 alter table members add column street;
-
-
 update old set priorres = 'yes'; 
-update members set partymember = 'yes'; 
 
+drop table councilupdated;
+.import uptodateregister.csv councilupdated
 
-
-insert into draftfreshdata (pd,eno,firstname,surname,fulladdress,street,address_1,address_2,address_3,address_4,address_5,address_6,address_7,v12,v14,green,intent,surveyn,knocked,other1,other2,yearmovedin,priorres) 
-select councilfullupdated.pd, councilfullupdated.eno, councilfullupdated.firstname, councilfullupdated.surname, councilfullupdated.fulladdress, councilfullupdated.street, councilfullupdated.address_1, councilfullupdated.address_2,councilfullupdated.address_3,councilfullupdated.address_4,councilfullupdated.address_5,councilfullupdated.address_6,councilfullupdated.address_7,
+insert into freshdata1 (pd,eno,firstname,surname,fulladdress,street,address_1,address_2,address_3,address_4,address_5,address_6,address_7,v12,v14,green,intent,surveyn,knocked,other1,other2,yearmovedin,priorres) 
+select councilupdated.pd, councilupdated.eno, councilupdated.firstname, councilupdated.surname, councilupdated.fulladdress, councilupdated.street, councilupdated.address_1, councilupdated.address_2,councilupdated.address_3,councilupdated.address_4,councilupdated.address_5,councilupdated.address_6,councilupdated.address_7,
 old.v12, old.v14, old.green, old.intent, old.surveyn, old.knocked, old.other1, old.other2, old.yearmovedin, old.priorres 
-from councilfullupdated 
-left outer join old on councilfullupdated.firstname = old.firstname and councilfullupdated.surname = old.surname and councilfullupdated.address_1 = old.address_1;
+from councilupdated 
+left outer join old on councilupdated.firstname = old.firstname and councilupdated.surname = old.surname and councilupdated.address_1 = old.address_1;
 
-update draftfreshdata set yearmovedin = '2015' where priorres is not 'yes';
-update draftfreshdata set priorres = 'no' where yearmovedin is '2015'; 
+update freshdata1 set yearmovedin = '2015' where priorres is not 'yes';
+update freshdata1 set priorres = 'no' where yearmovedin is '2015';
+
+delete from freshdata1 where rowid not in 
+(select min(rowid) from freshdata1 group by firstname, surname, address_1);
+
+drop table members;
+.import members.csv members
+alter table members add column partymember;
+alter table members add column street;
+update members set partymember = 'yes'; 
 
 drop table streetmembers;
 CREATE TABLE streetmembers(
@@ -412,22 +495,22 @@ CREATE TABLE streetmembers(
   "LastName" TEXT,
  partymember, street);
 
-insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_7;
+insert into streetmembers (FirstName, LastName, partymember, street) select freshdata1.firstname, freshdata1.surname, members.partymember, freshdata1.street from freshdata1 inner join members on freshdata1.firstname = members.FirstName and freshdata1.surname = members.LastName and members.PostalCode = freshdata1.address_7;
 
-insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_6;
+insert into streetmembers (FirstName, LastName, partymember, street) select freshdata1.firstname, freshdata1.surname, members.partymember, freshdata1.street from freshdata1 inner join members on freshdata1.firstname = members.FirstName and freshdata1.surname = members.LastName and members.PostalCode = freshdata1.address_6;
   
-insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_5;
+insert into streetmembers (FirstName, LastName, partymember, street) select freshdata1.firstname, freshdata1.surname, members.partymember, freshdata1.street from freshdata1 inner join members on freshdata1.firstname = members.FirstName and freshdata1.surname = members.LastName and members.PostalCode = freshdata1.address_5;
 
-insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_4;
+insert into streetmembers (FirstName, LastName, partymember, street) select freshdata1.firstname, freshdata1.surname, members.partymember, freshdata1.street from freshdata1 inner join members on freshdata1.firstname = members.FirstName and freshdata1.surname = members.LastName and members.PostalCode = freshdata1.address_4;
 
-insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_3;
+insert into streetmembers (FirstName, LastName, partymember, street) select freshdata1.firstname, freshdata1.surname, members.partymember, freshdata1.street from freshdata1 inner join members on freshdata1.firstname = members.FirstName and freshdata1.surname = members.LastName and members.PostalCode = freshdata1.address_3;
 
-insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_2;
+insert into streetmembers (FirstName, LastName, partymember, street) select freshdata1.firstname, freshdata1.surname, members.partymember, freshdata1.street from freshdata1 inner join members on freshdata1.firstname = members.FirstName and freshdata1.surname = members.LastName and members.PostalCode = freshdata1.address_2;
 
-insert into streetmembers (FirstName, LastName, partymember, street) select draftfreshdata.firstname, draftfreshdata.surname, members.partymember, draftfreshdata.street from draftfreshdata inner join members on draftfreshdata.firstname = members.FirstName and draftfreshdata.surname = members.LastName and members.PostalCode = draftfreshdata.address_1;
+insert into streetmembers (FirstName, LastName, partymember, street) select freshdata1.firstname, freshdata1.surname, members.partymember, freshdata1.street from freshdata1 inner join members on freshdata1.firstname = members.FirstName and freshdata1.surname = members.LastName and members.PostalCode = freshdata1.address_1;
 
-drop table cleandata;
-CREATE TABLE cleandata(
+drop table freshdata2;
+CREATE TABLE freshdata2(
   "pd" TEXT,
   "eno" TEXT,
   "firstname" TEXT,
@@ -451,125 +534,19 @@ CREATE TABLE cleandata(
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
-  "partymember" TEXT,
-  "remove"
+  "partymember" TEXT
 );
 
-insert into cleandata (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, priorres, v12, v14, green, intent, surveyn, knocked, other1, other2, yearmovedin, remove) 
-select draftfreshdata.pd, draftfreshdata.eno, draftfreshdata.firstname, draftfreshdata.surname, draftfreshdata.fulladdress, draftfreshdata.street, draftfreshdata.address_1, draftfreshdata.address_2, draftfreshdata.address_3, draftfreshdata.address_4, draftfreshdata.address_5, draftfreshdata.address_6, draftfreshdata.address_7, draftfreshdata.priorres, draftfreshdata.v12, draftfreshdata.v14, draftfreshdata.green, draftfreshdata.intent, draftfreshdata.surveyn, draftfreshdata.knocked, draftfreshdata.other1, draftfreshdata.other2, draftfreshdata.yearmovedin, toremove.remove
-from draftfreshdata left outer join toremove on draftfreshdata.firstname = toremove.firstname and draftfreshdata.surname = toremove.surname and draftfreshdata.address_1 = toremove.address_1;
-
-drop table freshdata;
-CREATE TABLE freshdata(
-  "pd" TEXT,
-  "eno" TEXT,
-  "firstname" TEXT,
-  "surname" TEXT,
-  "fulladdress" TEXT,
-  "street" TEXT,
-  "address_1" TEXT,
-  "address_2" TEXT,
-  "address_3" TEXT,
-  "address_4" TEXT,
-  "address_5" TEXT,
-  "address_6" TEXT,
-  "address_7" TEXT,
-  "priorres" TEXT,
-  "v12" TEXT,
-  "v14" TEXT,
-  "green" TEXT,
-  "intent" TEXT,
-  "surveyn" TEXT,
-  "yearmovedin" TEXT,
-  "knocked" TEXT,
-  "other1" TEXT,
-  "other2" TEXT,
-  "partymember" TEXT,
-  "remove"
-);
-
-insert into freshdata (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, priorres, v12, v14, green, intent, surveyn, knocked, other1, other2, yearmovedin, partymember, remove) 
-select cleandata.pd, cleandata.eno, cleandata.firstname, cleandata.surname, cleandata.fulladdress, cleandata.street, cleandata.address_1, cleandata.address_2, cleandata.address_3, cleandata.address_4, cleandata.address_5, cleandata.address_6, cleandata.address_7, cleandata.priorres, cleandata.v12, cleandata.v14, cleandata.green, cleandata.intent, cleandata.surveyn, cleandata.knocked, cleandata.other1, cleandata.other2, cleandata.yearmovedin, streetmembers.partymember, cleandata.remove
-from cleandata left outer join streetmembers on cleandata.firstname = streetmembers.FirstName and cleandata.surname = streetmembers.Lastname and cleandata.street = streetmembers.street;
-
-drop table streetdatares;
-drop table streetdatav14;
-drop table streetdatav14k;
-drop table streetdatav14notk;
-drop table togetherstreet;
-drop table streetdatagreen45;
-drop table streetdatagreen45v14;
-drop table streetdatak;
-
-
-create table streetdatares (street, res);
-insert into streetdatares (street, res) select distinct street, count (eno) from freshdata group by street;
-create table streetdatav14 (street, v14);
-insert into streetdatav14 (street, v14) select distinct street, count (v14) from freshdata where v14 is 'x' group by street;
-create table streetdatav14k (street, v14k);
-insert into streetdatav14k (street, v14k) select distinct street, count (v14) from freshdata where v14 is 'x' and knocked is not '' group by street;
-create table streetdatav14notk (street, v14notk);
-insert into streetdatav14notk (street, v14notk) select distinct street, count (v14) from freshdata where v14 is 'x' and knocked is '' group by street;
-
-create table streetdatagreen45 (street, green45);
-insert into streetdatagreen45 (street, green45) select distinct street, count (eno) from freshdata where green >= 4 group by street;
-
-create table streetdatagreen45v14 (street, green45v14);
-insert into streetdatagreen45v14 (street, green45v14) select distinct street, count (eno) from freshdata where green >= 4 and v14 is 'x' group by street;
-
-create table streetdatak (street, k);
-insert into streetdatak (street, k) select distinct street, count (eno) from freshdata where knocked is NULL group by street;
-
-create table togetherstreet (street, res, k, v14, v14k, v14notk, green45, green45v14);
-
-insert into togetherstreet (street, res, k, v14, v14k, v14notk, green45, green45v14) select streetdatares.street, streetdatares.res, streetdatak.k, streetdatav14.v14, streetdatav14k.v14k, streetdatav14notk.v14notk, streetdatagreen45.green45, streetdatagreen45v14.green45v14 from streetdatares left outer join streetdatav14 on streetdatares.street = streetdatav14.street left outer join streetdatav14k on streetdatares.street = streetdatav14k.street left outer join streetdatav14notk on streetdatares.street = streetdatav14notk.street left outer join streetdatagreen45 on streetdatares.street = streetdatagreen45.street left outer join streetdatagreen45v14 on streetdatares.street = streetdatagreen45v14.street left outer join streetdatak on streetdatares.street = streetdatak.street;
-
-drop table pddatares;
-drop table pddatav14;
-drop table pddatav14k;
-drop table pddatav14notk;
-drop table togetherpd;
-drop table pddatagreen45;
-drop table pddatagreen45v14;
-drop table pddatak;
-
-
-create table pddatares (pd, res);
-insert into pddatares (pd, res) select distinct pd, count (eno) from freshdata group by pd;
-create table pddatav14 (pd, v14);
-insert into pddatav14 (pd, v14) select distinct pd, count (v14) from freshdata where v14 is 'x' group by pd;
-create table pddatav14k (pd, v14k);
-insert into pddatav14k (pd, v14k) select distinct pd, count (v14) from freshdata where v14 is 'x' and knocked is not '' group by pd;
-create table pddatav14notk (pd, v14notk);
-insert into pddatav14notk (pd, v14notk) select distinct pd, count (v14) from freshdata where v14 is 'x' and knocked is '' group by pd;
-
-create table pddatagreen45 (pd, green45);
-insert into pddatagreen45 (pd, green45) select distinct pd, count (eno) from freshdata where green >= 4 group by pd;
-
-create table pddatagreen45v14 (pd, green45v14);
-insert into pddatagreen45v14 (pd, green45v14) select distinct pd, count (eno) from freshdata where green >= 4 and v14 is 'x' group by pd;
-
-create table pddatak (pd, k);
-insert into pddatak (pd, k) select distinct pd, count (eno) from freshdata where knocked is null group by pd;
-
-
-
-create table togetherpd (pd, res, k, v14, v14k, v14notk, green45, green45v14);
-
-insert into togetherpd (pd, res, k, v14, v14k, v14notk, green45, green45v14) select pddatares.pd, pddatares.res, pddatak.k, pddatav14.v14, pddatav14k.v14k, pddatav14notk.v14notk, pddatagreen45.green45, pddatagreen45v14.green45v14 from pddatares left outer join pddatav14 on pddatares.pd = pddatav14.pd left outer join pddatav14k on pddatares.pd = pddatav14k.pd left outer join pddatav14notk on pddatares.pd = pddatav14notk.pd left outer join pddatagreen45 on pddatares.pd = pddatagreen45.pd left outer join pddatagreen45v14 on pddatares.pd = pddatagreen45v14.pd left outer join pddatak on pddatares.pd = pddatak.pd;
+insert into freshdata2 (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, priorres, v12, v14, green, intent, surveyn, knocked, other1, other2, yearmovedin, partymember) 
+select freshdata1.pd, freshdata1.eno, freshdata1.firstname, freshdata1.surname, freshdata1.fulladdress, freshdata1.street, freshdata1.address_1, freshdata1.address_2, freshdata1.address_3, freshdata1.address_4, freshdata1.address_5, freshdata1.address_6, freshdata1.address_7, freshdata1.priorres, freshdata1.v12, freshdata1.v14, freshdata1.green, freshdata1.intent, freshdata1.surveyn, freshdata1.knocked, freshdata1.other1, freshdata1.other2, freshdata1.yearmovedin, streetmembers.partymember
+from freshdata1 left outer join streetmembers on freshdata1.firstname = streetmembers.FirstName and freshdata1.surname = streetmembers.Lastname and freshdata1.street = streetmembers.street;
 
 .headers on
-.output 1newdata.csv
-select * from freshdata;
+.output 1freshdata.csv
+select * from freshdata2;
 .output stdout
 
-.output 1pddata.csv
-select * from togetherpd;
-.output stdout
-
-.output 1streetdata.csv
-select * from togetherstreet; 
-.output stdout
+-- These lines will create two tables called 1pddata.csv and 1streetdata.csv with details on each area by street and by ward.
 
 drop table freshdata;
 drop table pddatares;
@@ -588,7 +565,7 @@ drop table streetdatagreen45v14;
 drop table streetdatak;
 
 .mode csv
-.import 1newdata.csv freshdata
+.import 1freshdata.csv freshdata
 
 create table pddatares (pd, res);
 insert into pddatares (pd, res) select distinct pd, count (eno) from freshdata group by pd;
@@ -645,6 +622,7 @@ select * from togetherpd;
 .output stdout
 
 
+-- these lines will create two csv files called 1knock and 1knockdraft, showing the people to be knocked next.
 
 
 drop table pdknocknext;
