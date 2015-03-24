@@ -36,8 +36,8 @@ def importcsvfile (csvfile,db):    #import a csv file called 'csvfile' into an S
         c=c+1
         if c == biggestrow:
             print "trying with row %r as headings" % (c) 
-    cur.execute("drop table if exists %r;" % (csvfile))       
-    cur.execute("create table %r(%r);" % (csvfile,something))      
+            cur.execute("drop table if exists %r;" % (csvfile))       
+            cur.execute("create table %r(%r);" % (csvfile,something))      
     print "This will now create table %s, in database %s" % (csvfile,db)
     print "it's just a pain it's not bloody understood the comma"
         
