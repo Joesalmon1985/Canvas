@@ -1,0 +1,10 @@
+# Generated files
+*.pyc
+t/
+141201/
+
+# Unversioned files go here
+attic/
+
+# Also unversioned
+To Do
