@@ -10,9 +10,7 @@ import tent
 import sqlite3, csv
 from sys import argv 
 
-# this tells try to test using the file specified when running python, i.e. running python try.py councilfull.csv will
-# mean that python tries to open councilfull.csv.
-script, filename = argv
+script, filename, db = argv
 
 # This tells python to start using SQLITE3 with a database called whatever what typed after python joesqlite.py.
 conn = sqlite3.connect( 'db' )
@@ -20,4 +18,4 @@ conn = sqlite3.connect( 'db' )
 # This tells python to start typing in the running sqlite3 program.
 cur = conn.cursor()
 
-tent.importcsvfile( filename )
+tent.importcsvfile( filename, db )
