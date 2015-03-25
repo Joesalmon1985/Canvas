@@ -17,6 +17,7 @@ def importcsvfile (csvfile,db):    #import a csv file called 'csvfile' into an S
 
     # Note how many filled COLUMNs in the most filled-in ROW
     biggestHead = 0
+
     for fdsa in filereader:
         c = c+1
         if c > 9:
@@ -52,5 +53,3 @@ def importcsvfile (csvfile,db):    #import a csv file called 'csvfile' into an S
             cur.execute("create table %r(%r);" % (csvfile,something))      
     print "This will now create table %s, in database %s" % (csvfile,db)
     print "it's just a pain it's not bloody understood the comma"
-        
-            
