@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# vim: tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab:
+
+__author__      = "Joe Salmon"
+__copyright__   = "Copyright 2015"
+
 from sys import argv
 import sqlite3
 import csv
