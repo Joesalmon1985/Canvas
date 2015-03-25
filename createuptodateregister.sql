@@ -27,8 +27,6 @@ DROP TABLE if exists ward26;
 DROP TABLE if exists ward27; 
 DROP TABLE if exists ward28; 
 
-# this part needs serious work, or will be dropped and replaced with python.
-
 .mode csv
 .import P141201_Adel_and_Wharfedale.csv ward01
 .import P141201_Alwoodley.csv ward02
@@ -42,8 +40,6 @@ DROP TABLE if exists ward28;
 .import P141201_Garforth_and_Swillington.csv ward10
 .import P141201_Gipton_and_Harehills.csv ward11
 .import P141201_Guiseley_and_Rawdon.csv ward12
-
-## from below this works fine, once data is in tables called wardXX where XX are numbers from 00-28, for more than 28 it'll need changing.
 
 drop table if exists alldata;
 CREATE TABLE alldata(
@@ -151,7 +147,7 @@ CREATE TABLE removedfulldata(
   "toremove" 
 );
 
-insert into removedfulldata (pd, eno, title, firstname, initials, surname, suffix, dateofattainment, franchiseflag, address1, address2, address3, address4, address5, address6, address7, postcode, toremove) select fulldata.pd, fulldata.eno, fulldata.title, fulldata.firstname, fulldata.initials, fulldata.surname, fulldata.suffix, fulldata.dateofattainment, fulldata.franchiseflag, fulldata.address1, fulldata.address2, fulldata.address3, fulldata.address4, fulldata.address5, fulldata.address6, fulldata.address7, fulldata.postcode, toremove.toremove 
+insert into removedfulldata (pd, eno, stat, title, firstname, initials, surname, suffix, dateofattainment, franchiseflag, address1, address2, address3, address4, address5, address6, address7, postcode, toremove) select fulldata.pd, fulldata.eno, fulldata.stat, fulldata.title, fulldata.firstname, fulldata.initials, fulldata.surname, fulldata.suffix, fulldata.dateofattainment, fulldata.franchiseflag, fulldata.address1, fulldata.address2, fulldata.address3, fulldata.address4, fulldata.address5, fulldata.address6, fulldata.address7, fulldata.postcode, toremove.toremove 
 from fulldata left outer join toremove on fulldata.firstname = toremove.firstname and fulldata.surname = toremove.surname and fulldata.address1 = toremove.address1;
 
 drop table if exists uptodatecouncildata;
@@ -177,7 +173,7 @@ CREATE TABLE uptodatecouncildata(
   "postcode" TEXT
 );
 
-insert into uptodatecouncildata (pd, eno, title, firstname, initials, surname, suffix, dateofattainment, franchiseflag, address1, address2, address3, address4, address5, address6, address7, postcode) select pd, eno, title, firstname, initials, surname, suffix, dateofattainment, franchiseflag, address1, address2, address3, address4, address5, address6, address7, postcode from removedfulldata where toremove is not 'toremove';
+insert into uptodatecouncildata (pd, eno, stat, title, firstname, initials, surname, suffix, dateofattainment, franchiseflag, address1, address2, address3, address4, address5, address6, address7, postcode) select pd, eno, stat, title, firstname, initials, surname, suffix, dateofattainment, franchiseflag, address1, address2, address3, address4, address5, address6, address7, postcode from removedfulldata where toremove is not 'toremove';
 
 delete from uptodatecouncildata where rowid not in 
 (select min(rowid) from uptodatecouncildata group by firstname, surname, address1);
