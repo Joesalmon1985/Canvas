@@ -35,10 +35,9 @@ def importcsvfile (csvfile,db):    #import a csv file called 'csvfile' into an S
         if posHead > biggestHead:
             biggestHead = posHead
             biggestrow = c
-        
-    print "you probably need the headings from row %r and these are %r columns" % (biggestrow, biggestHead)
-        
-    
+
+    print "You want the headings from row %r, and there are %r columns" % (biggestrow, biggestHead)
+
     conn = sqlite3.connect(db)
     cur = conn.cursor()
     filereader = csv.reader( open(csvfile, 'rt'), delimiter=',') #
