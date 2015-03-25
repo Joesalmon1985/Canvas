@@ -30,11 +30,10 @@ def importcsvfile (csvfile,db):    #import a csv file called 'csvfile' into an S
                 break
             else:
                 posHead = posHead + 1
-                lastrow = posHead
-        if lastrow < biggestHead:
-            biggestHead = biggestHead
-        else:
-            biggestHead = lastrow
+
+        # If the ROW is more filled in than the current best, then record it
+        if posHead > biggestHead:
+            biggestHead = posHead
             biggestrow = c
         
     print "you probably need the headings from row %r and these are %r columns" % (biggestrow, biggestHead)
