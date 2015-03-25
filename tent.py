@@ -11,12 +11,18 @@ import re
 
 def importcsvfile (csvfile,db):    #import a csv file called 'csvfile' into an SQlite database called db.
     filereader = csv.reader( open(csvfile, 'rt'), delimiter=',') #rt means read text, delimiter tells it we'll use commas.
+
+    # count of lines read, we will stop at 10
     c = 0
+
+    # Note how many filled COLUMNs in the most filled-in ROW
     biggestHead = 0
     for fdsa in filereader:
         c = c+1
         if c > 9:
             break
+
+        # Note how many filled COLUMNs in ROW c
         posHead = 0
         for column in fdsa:
             #print column
