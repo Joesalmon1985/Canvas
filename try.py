@@ -8,7 +8,7 @@ __copyright__   = "Copyright 2015, Planet Earth"
 
 import tent
 import sqlite3, csv
-from sys import argv 
+from sys import argv
 
 script, filename, db = argv
 
