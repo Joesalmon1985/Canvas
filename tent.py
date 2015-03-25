@@ -25,14 +25,20 @@ def importcsvfile (csvfile,db):    #import a csv file called 'csvfile' into an S
             biggestHead = lastrow
             biggestrow = c
         
-    print "I've broken out"
-    print "you need the headings from row %r and these are %r columns" % (biggestrow, biggestHead)
-            
-    
-    
+    print "you probably need the headings from row %r and these are %r columns" % (biggestrow, biggestHead)
+        
     
     conn = sqlite3.connect(db)
     cur = conn.cursor()
-    cur.execute("drop table if exists %r;" % (csvfile))       
-    cur.execute("create table %r(data);" % (csvfile))      
+    filereader = csv.reader( open(csvfile, 'rt'), delimiter=',') #
+    c=0
+    for something in filereader:
+        c=c+1
+        if c == biggestrow:
+            print "trying with row %r as headings" % (c) 
+            cur.execute("drop table if exists %r;" % (csvfile))       
+            cur.execute("create table %r(%r);" % (csvfile,something))      
     print "This will now create table %s, in database %s" % (csvfile,db)
+    print "it's just a pain it's not bloody understood the comma"
+        
+            
