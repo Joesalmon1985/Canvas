@@ -26,7 +26,6 @@ def importcsvfile (csvfile,db):    #import a csv file called 'csvfile' into an S
         # Note how many filled COLUMNs in ROW c
         posHead = 0
         for column in fdsa:
-            #print column
             if column == '':
                 break
             else:
