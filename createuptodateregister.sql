@@ -25,7 +25,8 @@ DROP TABLE if exists ward24;
 DROP TABLE if exists ward25; 
 DROP TABLE if exists ward26; 
 DROP TABLE if exists ward27; 
-DROP TABLE if exists ward28; 
+DROP TABLE if exists ward28;
+DROP TABLE if exists ward29;
 
 .mode csv
 .import P141201_Adel_and_Wharfedale.csv ward01
