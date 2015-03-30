@@ -19,6 +19,7 @@ def csvregs(n):
 def startofp ( ):
     global numbercsvreg
     global nadb
+    # Rather than having to type in every csv file there must be a better way.
     print "How many csv files contain electoral register information you need to use?"
     numbercsvreg = input(">")
     if numbercsvreg >= 100:
@@ -30,6 +31,7 @@ def startofp ( ):
         for something in csvregs(numbercsvreg):
             print "importing csv as %s what is the csv called?" % (something)
             csvtoimport = raw_input(">")
+            # before the CSV file is imported, a postcode column should be added.
             importcsvfile.importcsvfile(csvtoimport, nadb, something)
             
 
@@ -47,6 +49,7 @@ def middleofp ( ):
     print "combining %s raw files, are all required Headings the same? y/n" % (numbercsvreg)
     yesno = raw_input (">")
     if yesno == "n":
+        # there must be a better way than this.
         for something in csvregs(numbercsvreg):
             print "in the files what is the name of the PD colmn?" 
             pdcol = raw_input (">")
@@ -81,6 +84,7 @@ def middleofp ( ):
         print "are column names unchanged default? y/n"
         answer = raw_input (">")
         if answer == "n":
+        # This is painfull, there must be a better way.
             print "in the files what is the name of the PD colmn?" 
             pdcol = raw_input (">")
             print "in the files what is the name of the ENO colmn?"
@@ -111,6 +115,7 @@ def middleofp ( ):
                 cur.execute (sql) 
                 conn.commit ()
         else:
+        # This works okay. Could be better though.
             print "assuming all column names unchanged default"
             pdcol = "PD"
             enocol = "ENO"
