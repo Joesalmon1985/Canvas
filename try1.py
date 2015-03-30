@@ -32,6 +32,8 @@ def startofp ( ):
             print "importing csv as %s what is the csv called?" % (something)
             csvtoimport = raw_input(">")
             # before the CSV file is imported, a postcode column should be added.
+            # Tried the below, doesn't work. Don't understand why.
+            addpostcode.AddPostcodeColumn(csvtoimport)
             importcsvfile.importcsvfile(csvtoimport, nadb, something)
             
 
