@@ -5,7 +5,7 @@ __author__ = "Joe Salmon"
 __copyright__ = "Copyright 2015, The Green Party UK"
 
 import importcsvfile
-import postcode
+import addpostcode
 import sqlite3, csv
 from sys import argv
         
