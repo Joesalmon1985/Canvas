@@ -84,6 +84,11 @@ def insertdata (csvfile,db, naTable):
             #This makes the data into strings.
             strHeaders = "'" + "','".join( headingstouse ) + "'"            
             strSomething = "'" + "','".join( something ) + "'"
+            #This tries to replace a bit of the string with something else
+            problemchar = '[A-Z]'
+            print str.replace(strSomething, problemchar, "HELLORE" )
+            print str.replace(strSomething, "[A-Z]{1:3}", "HELLO " )
+
             sql = "INSERT INTO %r (%s) VALUES( %s );" % ( naTable, strHeaders, strSomething )
             cur.execute(sql)
             conn.commit()
