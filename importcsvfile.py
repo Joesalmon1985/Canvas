@@ -119,8 +119,6 @@ def HeadingsFromCSV( ):
 
 def CreateTable( ):
     global cursor, naTable
-    print "creating table"
-    print "CREATE TABLE %r(\n%s\n)" % ( naTable, MakeColumnSpecifications( ) ) 
 
     cursor.execute( "DROP TABLE IF EXISTS %r" % ( naTable ) )
     cursor.execute( "CREATE TABLE %r(\n%s\n)" % ( naTable, MakeColumnSpecifications( ) ) )
@@ -153,4 +151,5 @@ def InsertData( ):
             print e
             print row
             #cursor.execute( "DROP TABLE IF EXISTS %r" % ( naTable ) )
+
 
