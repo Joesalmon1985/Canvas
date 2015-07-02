@@ -2,92 +2,155 @@
 # vim: tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab:
 
 __author__      = "Joe Salmon"
-__copyright__   = "Copyright 2015"
+__copyright__   = "Copyright (c) 2015, The Green Party UK"
 
 from sys import argv
 import sqlite3
 import csv
 import re
+import os
+from os.path import basename
 
-# asks what file to import to a db with what file name
-def askaboutimport ( ):
-    print "What is the name of the CSV file you would like to import?"
-    csvtoimport = raw_input (">")
-    print "What is the name of the database you want to work in / create?"
-    dbtouse = raw_input (">")
-    print "Finally what is the name of the table you want to create with imported CSV data?"
-    tablename = raw_input (">")
-    importcsvfile (csvtoimport,dbtouse,tablename)
-    
-# imports a given csv into db with a suggested name
-def importcsvfile (csvfile,db,naTable):
-    makeheadings (csvfile,db, naTable)
-    insertdata (csvfile,db, naTable)
+# global variables
+naFileCSV = ''
+naDataBase = ''
+naTable = ''
+iRowHeadings = 1
+listHeadings = []
+cursor = None
 
-# creates the headings
-def makeheadings (csvfile,db, naTable):
-    global biggestHead
-    global headingsforever
-    global biggestrow
-    global cur
-    global conn
+def importcsvfile ( csvfile, db ):    #import a csv file called 'csvfile' into an SQlite database called db.
+    global naFileCSV, naDataBase, naTable, cursor
+    naFileCSV = csvfile
+    naDataBase = db
+    naTable = os.path.splitext( basename( naFileCSV ) )[0]
 
+    HeadingsFromCSV( )
+
+    with sqlite3.connect( naDataBase ) as conn:
+        cursor = conn.cursor()
+        CreateTable( )
+        InsertData( )
+
+        # We explicitly commit
+        conn.commit()
+
+    return
     filereader = csv.reader( open(csvfile, 'rt'), delimiter=',')
-    c = 0
-    biggestHead = 0
-    for fdsa in filereader:
-        c = c+1
-        if c > 9:
-            break
-        posHead = 0
-        for column in fdsa:
-            if column == '':
-                break
-            else:
-                posHead = posHead + 1
-        if posHead > biggestHead:
-            biggestHead = posHead
-            biggestrow = c
-    conn = sqlite3.connect(db)
-    cur = conn.cursor()
-    filereader = csv.reader( open(csvfile, 'rt'), delimiter=',') 
     c=0
     for something in filereader:
-        headings = something
-        strHeaders = "'" + "','".join( headings ) + "'"
         c=c+1
-        if c == biggestrow:            
+        if c == biggestrow:
+            cur.execute("drop table if exists dummytable;" )       
+            cur.execute("create table dummytable(datanumber);" )
             columns = biggestHead
-            cur.execute("drop table if exists %r;" % (naTable) )       
-            cur.execute("create table %r(%s);" % (naTable,strHeaders) )
-            print "CREATED TABLE %r, with below headings" % (naTable)
-            print headings
-            headingsforever = headings           
+            headingsforever = something
+            for a in something:
+                cur.execute("alter table dummytable add column %r;" % (a))
+                if columns == 0:
+                    break
+                else:
+                    
+                    columns = columns - 1
+                 
+            
+    print "finished checking first tent lines, assuming no data above Headings"
+    print "will assume correct headings are %s" % (headingsforever)
 
-    #do not ommit this line, without it data would be thrown away.            
-    conn.commit()
-
-# adds data
-def insertdata (csvfile,db, naTable):
-    global biggestHead
-    global headingsforever
-    global biggestrow
-    global cur
-    global conn
-    filereader = csv.reader( open(csvfile, 'rt'), delimiter=',')
+    filereader = csv.reader( open(csvfile, 'rt'), delimiter=',') 
     line = 0
     for something in filereader:
         line = line +1
         columns = biggestHead +1
         headingstouse = headingsforever
         if line > biggestrow:
+            print "now I am on line %s and need to add the below into one of %s columns" % (line, columns)
             #This makes the data into strings.
-            strHeaders = "'" + "','".join( headingstouse ) + "'"            
+            strHeaders = "'" + "','".join( headingstouse ) + "'"
+            print strHeaders
             strSomething = "'" + "','".join( something ) + "'"
-            sql = "INSERT INTO %r (%s) VALUES( %s );" % ( naTable, strHeaders, strSomething )
+            sql = "INSERT INTO dummytable (%s) VALUES( %s )" % ( strHeaders, strSomething )
+            print sql
             cur.execute(sql)
-            conn.commit()
-            print something            
-    print "FINISHED adding the above to table %r" % (naTable)     
+                
+        else:
+                print "not adding this line"
+                
+                 
+                
+                
+    #do not ommit this line, without it data would be thrown away.            
     conn.commit()
-    
+
+def HeadingsFromCSV( ):
+    global naFileCSV, iRowHeadings, listHeadings
+
+    # count of lines read, we will stop at 10
+    cRow = 0
+
+    # Note how many filled COLUMNs in the most filled-in ROW
+    cbestFilledFields = 0
+
+    # rb : means read, with binary mode ( see https://docs.python.org/2/library/csv.html#module-contents )
+    # delimiter : ',' tells the reader to separate fields with commas
+    with open( naFileCSV, 'rb' ) as f:
+        filereader = csv.reader( f, delimiter=',' )
+        for fdsa in filereader:
+            cRow = cRow+1
+            if cRow > 9:
+                break
+
+            # Note how many filled COLUMNs in ROW cRow
+            cFilledFields = 0
+            for column in fdsa:
+                if column == '':
+                    break
+                else:
+                    cFilledFields = cFilledFields + 1
+
+            # If the ROW is more filled in than the current best, then record it
+            if  cFilledFields > cbestFilledFields:
+                cbestFilledFields = cFilledFields
+                iRow = cRow
+                rowHeadings = fdsa
+
+    iRowHeadings = iRow
+    listHeadings = rowHeadings
+
+def CreateTable( ):
+    global cursor, naTable
+    print "creating table"
+    print "CREATE TABLE %r(\n%s\n)" % ( naTable, MakeColumnSpecifications( ) ) 
+
+    cursor.execute( "DROP TABLE IF EXISTS %r" % ( naTable ) )
+    cursor.execute( "CREATE TABLE %r(\n%s\n)" % ( naTable, MakeColumnSpecifications( ) ) )
+
+def MakeColumnSpecifications( ):
+    s = ''
+    for column in listHeadings:
+        s = s + ' "' + column + '"' + " TEXT,\n"
+
+    # Now trim trailing comma
+    return s.rstrip( ",\n" )
+
+def InsertData( ):
+    global naFileCSV, naTable, iRowHeadings
+
+    with open( naFileCSV, 'rb' ) as f:
+        filereader = csv.reader( f, delimiter=',' )
+        for unused in range( iRowHeadings ):
+            filereader.next( )
+
+        try:
+            for row in filereader:
+                strRow = "', '".join( row )
+                # must use single quotation marks
+                strRow = re.sub( r"( ?'[^,']*)'([^,']*',?)", r"\1'' \2", strRow )
+                sql = "INSERT INTO %r VALUES( '%s' )" % ( naTable, strRow )
+                cursor.execute( sql )
+
+        except Exception as e:
+            print e
+            print row
+            #cursor.execute( "DROP TABLE IF EXISTS %r" % ( naTable ) )
+
