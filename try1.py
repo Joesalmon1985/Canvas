@@ -14,5 +14,5 @@ rawcandata = raw_input('>')
 # ths imports the raw data from the csv file into the hope.db file
 importcsvfile.importcsvfile (rawcandata,filenamedb)
 
-print "added %r into hope.db" % (rawcandata)
+print "added %s into hope.db" % (rawcandata)
 
