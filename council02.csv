@@ -1,0 +1,5 @@
+pd,eno,remove,title ,firstname,initals ,surname,suffis,dateofattainment,franchiseflag,address1,address2,address3,address4,address5,address6,address7,flat,house,subroad,road,registercode,clericalerror,optoutflag
+HEA,35,A,,Bob,,Rimmington,,,,29 ASH CRESCENT,LEEDS,LS6 3LE,,,,,,,,ASH CRESCENT,HEA,,
+HEA,197,A,,Stephanie,,Wright,,,,168 ASH ROAD,LEEDS,LS6 3HD,,,,,,,,ASH ROAD,HEA,,
+HEA,290,A,,Abbey,,Gartside,,,,7 DERWENTWATER GROVE,LEEDS,LS6 3EN,,,,,,,,DERWENTWATER GROVE,HEA,,Z
+HEA,310,A,,Holly,C,Shirley,,,,16 DERWENTWATER GROVE,LEEDS,LS6 3EN,,,,,,,,DERWENTWATER GROVE,HEA,,
