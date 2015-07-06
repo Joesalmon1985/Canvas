@@ -23,7 +23,7 @@ def importcsvfile ( csvfile, db ):    #import a csv file called 'csvfile' into a
     global naFileCSV, naDataBase, naTable, cursor
     naFileCSV = csvfile
     naDataBase = db
-    naTable = os.path.splitext( basename( naFileCSV ) )[0]
+    naTable = naFileCSV
 
     HeadingsFromCSV( )
 
@@ -83,7 +83,7 @@ def importcsvfile ( csvfile, db ):    #import a csv file called 'csvfile' into a
     conn.commit()
 
 def HeadingsFromCSV( ):
-    global naFileCSV, iRowHeadings, listHeadings
+    global naFileCSV, iRowHeadings, listHeadings, iRow, rowHeadings
 
     # count of lines read, we will stop at 10
     cRow = 0
@@ -151,5 +151,4 @@ def InsertData( ):
             print e
             print row
             #cursor.execute( "DROP TABLE IF EXISTS %r" % ( naTable ) )
-
 
