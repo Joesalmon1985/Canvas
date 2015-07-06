@@ -1,0 +1,7 @@
+pd,eno,remove,title ,firstname,initals ,surname,suffis,dateofattainment,franchiseflag,address1,address2,address3,address4,address5,address6,address7,flat,house,subroad,road,registercode,clericalerror,optoutflag
+HEA,112,A,,James,,Armstrong,,,,28 ASH ROAD,LEEDS,LS6 3JF,,,,,,,,,,,
+HEA,33,A,,Ben,,Fowler,,,,27 ASH CRESCENT,LEEDS,LS6 3LE,,,,,,,,ASH CRESCENT,HEA,,
+HEA,35,D,,Bob,,Rimmington,,,,29 ASH CRESCENT,LEEDS,LS6 3LE,,,,,,,,ASH CRESCENT,HEA,,
+HEA,54,A,,Joe,J,Salmon,,,,24 ASH CRESCENT,LEEDS,LS6 3LE,,,,,,,,ASH CRESCENT,HEA,,
+HEA,30,D,,Natisha,,Morris,,,,25 ASH CRESCENT,LEEDS,LS6 3LE,,,,,,,,,,,
+HEA,70,D,,Thomas,,Morris,,,,8 ASH GARDENS,LEEDS,LS6 3LD,,,,,,Z,,,,,
