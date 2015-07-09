@@ -207,6 +207,8 @@ class CouncilUpdate:
            for row in cursor.execute( tobedone ):
             print row
             for a in row:
+		if a is None:
+			continue
                 looking = a
                 if re.match('[A-Z]{1,2}[0-9]{1,2} [0-9]{1,2}[A-Z]{2}', looking):
                     print "FOUND A POSTCODE!"

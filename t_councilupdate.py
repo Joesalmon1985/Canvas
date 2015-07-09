@@ -40,11 +40,12 @@ class T( unittest.TestCase ):
                 cursor = conn.cursor()
                 tobedone = '''select * from %r;''' % (files)
                 cursor.execute( tobedone )
+                if cursor.rowcount < 1:
+                    continue
                 r = cursor.fetchone ( )
                 checkingfile = r[ 0 ]
                 print checkingfile
-        print checkingfile
-        self.assertIsNotNone(checkingfile, 'nothing in the file')
+                self.assertIsNotNone(checkingfile, 'nothing in the file')
 
 
     def test_addingtocouncilupdated ( self ):
@@ -93,6 +94,7 @@ class T( unittest.TestCase ):
             row = cursor.fetchone ( )
             cPostcode = row[ 0 ]
             print "printing cPostcode %r" % (cPostcode)
+            self.assertIsNotNone(cPostcode, 'Postcode should not be null')
             self.assertEqual('LS6 3EN', cPostcode, 'Postcode isnt correct')
         
 
