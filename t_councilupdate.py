@@ -12,10 +12,7 @@ from councilupdate import CouncilUpdate
 
 naDataBase = 'testme.db'
 
-
 class T( unittest.TestCase ):
-
-
 
 # This first test doesn't work
     def test_createcouncilupdatefiles (self):
@@ -40,12 +37,11 @@ class T( unittest.TestCase ):
                 cursor = conn.cursor()
                 tobedone = '''select * from %r;''' % (files)
                 cursor.execute( tobedone )
-                if cursor.rowcount < 1:
-                    continue
                 r = cursor.fetchone ( )
                 checkingfile = r[ 0 ]
                 print checkingfile
-                self.assertIsNotNone(checkingfile, 'nothing in the file')
+        print checkingfile
+        self.assertIsNotNone(checkingfile, 'nothing in the file')
 
 
     def test_addingtocouncilupdated ( self ):
@@ -76,7 +72,30 @@ class T( unittest.TestCase ):
             self.assertEqual( 4, cBefore, 'Provided 4 ROWs with one duplicate, and one to remove' )
             self.assertEqual( 2, cAfter, 'Leaving 2 ROWs' )
 
-    def test_addingpostcodes ( self ):
+    def test_addingpostcodecol ( self ):
+        cu = CouncilUpdate ( )
+        cu.createcouncilupdatefiles ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
+            cursor = conn.cursor()
+            tobedone = '''insert into councilupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7) VALUES ("HEA","310","Phil","Daley","16 DERWENTWATER GROVELEEDSLS6 3EN","","16 DERWENTWATER GROVE","LEEDS","LS6 3EN","","","","")
+'''
+            cursor.execute( tobedone )
+            tobedone = '''insert into councilupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7) VALUES ("HEA","310","Julie","Fillery","53 DERWENTWATER GROVELEEDSLS3 8RE","","16 DERWENTWATER GROVE","LEEDS","LS3 8RE","","","","")
+'''
+            cursor.execute( tobedone )
+            tobedone = '''insert into councilupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7) VALUES ("HEA","310","James","Daley","16 DERWENTWATER GROVELEEDSNOPOST","","18 DERWENTWATER GROVE","LEEDS","NO POSTCODE","","","","")
+'''
+            cursor.execute( tobedone )
+            conn.commit()
+            cu.addingpostcodecol (naDataBase)
+            tobedone = '''select COUNT( postcode ) from councilupdated'''
+            cursor.execute( tobedone )
+            row = cursor.fetchone ( )
+            cPostcode = row[ 0 ]
+            print "cPostcode: %r" % (cPostcode)
+            self.assertIsNotNone(cPostcode, 'Postcode column isnt added')
+        
+    def test_goodpostcodedata ( self ):
         cu = CouncilUpdate ( )
         cu.createcouncilupdatefiles ( naDataBase )
         with sqlite3.connect( naDataBase ) as conn:
@@ -88,19 +107,31 @@ class T( unittest.TestCase ):
 '''
             cursor.execute( tobedone )
             conn.commit()
-            cu.addingpostcodes (naDataBase)
+            cu.addingpostcodecol( naDataBase )
+            conn.commit()
+            cu.addingpostcodedata (naDataBase)
             tobedone = '''select postcode from councilupdated'''
             cursor.execute( tobedone )
-            row = cursor.fetchone ( )
-            cPostcode = row[ 0 ]
-            print "printing cPostcode %r" % (cPostcode)
-            self.assertIsNotNone(cPostcode, 'Postcode should not be null')
-            self.assertEqual('LS6 3EN', cPostcode, 'Postcode isnt correct')
-        
+            for row in ( cursor ):
+                print row
+            	self.assertIsNotNone( row[ 0 ], 'Not a postcode' )
 
-
-#        self.assertEqual( 18, result.count( ',' ), 'Expected 18 commas in my CSV' )
-#        self.assertTrue( result.endswith( ',' ), 'Expected last field to be empty' )
+    def test_badpostcodedata ( self ):
+        cu = CouncilUpdate ( )
+        cu.createcouncilupdatefiles ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
+            cursor = conn.cursor()
+            tobedone = '''insert into councilupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7) VALUES ("HEA","310","James","Daley","16 DERWENTWATER GROVELEEDSNOPOST","","18 DERWENTWATER GROVE","LEEDS","NO POSTCODE","","","","")
+'''
+            cursor.execute( tobedone )
+            conn.commit()
+            cu.addingpostcodecol( naDataBase )
+            conn.commit()
+            cu.addingpostcodedata (naDataBase)
+            tobedone = '''select postcode from councilupdated'''
+            cursor.execute( tobedone )
+            for row in ( cursor ):
+            	self.assertIsNone( row[ 0 ], 'Not a postcode' )
 
 
 #def addingtocouncilupdated (databaseused):
