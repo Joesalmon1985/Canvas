@@ -141,9 +141,9 @@ def InsertData( ):
 
         try:
             for row in filereader:
+                # must quote (double up) single quotation marks
+                row[:] = [s.replace("'", "''") for s in row]
                 strRow = "', '".join( row )
-                # must use single quotation marks
-                strRow = re.sub( r"( ?'[^,']*)'([^,']*',?)", r"\1'' \2", strRow )
                 sql = "INSERT INTO %r VALUES( '%s' )" % ( naTable, strRow )
                 cursor.execute( sql )
 
