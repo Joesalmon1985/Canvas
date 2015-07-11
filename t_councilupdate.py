@@ -29,7 +29,8 @@ class T( unittest.TestCase ):
 
 # I cannot think how to test this part of the Councilupdate.py file
     def test_findcouncildata (self):
-        pass
+        cu = CouncilUpdate ( )
+        cu.findcouncildata ( naDataBase )
 
 #        cu = CouncilUpdate ( )
 #        cu.createcouncilupdatefiles ( naDataBase )
