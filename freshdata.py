@@ -14,7 +14,15 @@ class FreshData:
 	    	print "creating required tables"
 		fd = FreshData ( )
 	    	fd.createfreshdatanomembers (databaseused)
-
+	    	fd.createfreshdatamembers (databaseused)
+	    	fd.createmembersdata (databaseused)
+	    	fd.createfreshdatanohalls (databaseused)
+	    	fd.createfreshdatanohallsnoflat (databaseused)
+	    	fd.createcouncildata (databaseused)
+	    	fd.createolddata (databaseused)
+	    	fd.createstudent1 (databaseused)
+	    	fd.createstudent2 (databaseused)
+	    	fd.createstudent3 (databaseused)
 
 	def uppercasememberpostcode (self, databaseused):
 		print "nothing done yet"
@@ -22,27 +30,36 @@ class FreshData:
 	    
 	def updateyearmoved (self, databaseused):
 		print "nothing done yet"
-	    
+	  
+
+  
 	def insertintofreshdatanomembers (self, databaseused):
 		print "nothing done yet"
 
-	def importcouncildatacsv (self, databaseused):
-		print "nothing done yet"
+	def importmemberdatacsv (self, databaseused, membercsv):
+		importcsvfile.importcsvfile (membercsv, databaseused)
+		with sqlite3.connect( databaseused ) as conn:
+			cursor = conn.cursor()
+			tobedone = """INSERT INTO membersdata SELECT * from '%s';""" % (membercsv)
+			cursor.execute( tobedone )
+			conn.commit()
+
+	def importcouncildatacsv (self, databaseused, councilcsv):
+		importcsvfile.importcsvfile (councilcsv, databaseused)
+		with sqlite3.connect( databaseused ) as conn:
+			cursor = conn.cursor()
+			tobedone = """INSERT INTO councildata SELECT * from '%s';""" % (councilcsv)
+			cursor.execute( tobedone )
+			conn.commit()
 
 	def importcouncildatasql (self, databaseused):
 		print "nothing done yet"
 
 	def importolddatacsv (self, databaseused, oldcsv):
-		csvused = str.rstrip (oldcsv)
-		print "importing csv data"
-		importcsvfile.importcsvfile (csvused, databaseused)
-		print "imported csv data"
-		print oldcsv
-		print csvused
-		
+		importcsvfile.importcsvfile (oldcsv, databaseused)
 		with sqlite3.connect( databaseused ) as conn:
 			cursor = conn.cursor()
-			tobedone = """INSERT INTO olddata SELECT * from '%s';""" % (csvused)
+			tobedone = """INSERT INTO olddata SELECT * from '%s';""" % (oldcsv)
 			cursor.execute( tobedone )
 			conn.commit()
 
@@ -77,10 +94,11 @@ class FreshData:
   "priorres" TEXT,
   "v12" TEXT,
   "v14" TEXT,
+  "v15",
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -116,7 +134,7 @@ class FreshData:
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -153,7 +171,7 @@ class FreshData:
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -170,30 +188,36 @@ class FreshData:
             		cursor.execute( tobedone )
 		        conn.commit()
 		        tobedone = '''CREATE TABLE membersdata(
-  "pd" TEXT,
-  "eno" TEXT,
-  "firstname" TEXT,
-  "surname" TEXT,
-  "fulladdress" TEXT,
-  "street" TEXT,
-  "address_1" TEXT,
-  "address_2" TEXT,
-  "address_3" TEXT,
-  "address_4" TEXT,
-  "address_5" TEXT,
-  "address_6" TEXT,
-  "address_7" TEXT,
-  "priorres" TEXT,
-  "v12" TEXT,
-  "v14" TEXT,
-  "green" TEXT,
-  "intent" TEXT,
-  "surveyn" TEXT,
-  "yearmovedin" TEXT,
-  "knocked" TEXT,
-  "other1" TEXT,
-  "other2" TEXT,
-  "partymember" TEXT
+  "Contact Name" TEXT,
+  "Joint member name" TEXT,
+  "Postal Greeting" TEXT,
+  "Email Greeting" TEXT,
+  "First Name" TEXT,
+  "Last Name" TEXT,
+  "Do not mail" TEXT,
+  "Addressee" TEXT,
+  "Contact ID" TEXT,
+  "Membership Type" TEXT,
+  "Start Date" TEXT,
+  "End Date" TEXT,
+  "Member Since" TEXT,
+  "Source" TEXT,
+  "Status" TEXT,
+  "Street Address" TEXT,
+  "Supplemental Address 1" TEXT,
+  "Supplemental Address 2" TEXT,
+  "City" TEXT,
+  "Postal Code" TEXT,
+  "Country" TEXT,
+  "Email" TEXT,
+  "Phone (primary)" TEXT,
+  "Mobile" TEXT,
+  "Ward" TEXT,
+  "Local authority" TEXT,
+  "Westminster parliament constituency" TEXT,
+  "Local party" TEXT,
+  "Regional party" TEXT,
+  "Override local party" TEXT
 );
       '''
                 cursor.execute( tobedone )
@@ -224,10 +248,11 @@ class FreshData:
   "priorres" TEXT,
   "v12" TEXT,
   "v14" TEXT,
+  "v15" TEXT,
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -263,7 +288,7 @@ class FreshData:
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -273,7 +298,7 @@ class FreshData:
                 cursor.execute( tobedone )
                 conn.commit()
 	        
-	        
+					
 	def createstudent2 (self, databaseused):
 		with sqlite3.connect( databaseused ) as conn:
             		cursor = conn.cursor()
@@ -300,7 +325,7 @@ class FreshData:
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -336,7 +361,7 @@ class FreshData:
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -372,7 +397,7 @@ class FreshData:
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -407,7 +432,7 @@ class FreshData:
   "green" TEXT,
   "intent" TEXT,
   "surveyn" TEXT,
-  "yearmovedin" TEXT,
+  "datemovedin" TEXT,
   "knocked" TEXT,
   "other1" TEXT,
   "other2" TEXT,
@@ -420,3 +445,66 @@ class FreshData:
 	def createfreshdata ( thing ):
 		print thing
 		print "nothing here yet"
+
+
+	def olddataextracol (self, databaseused):
+		with sqlite3.connect( databaseused ) as conn:
+            		cursor = conn.cursor()
+            		tobedone = '''ALTER TABLE olddata add column v12;'''
+            		cursor.execute( tobedone )
+		        conn.commit()
+	
+	def priorresupdate1 (self, databaseused):
+		with sqlite3.connect( databaseused ) as conn:
+            		cursor = conn.cursor()
+            		tobedone = """UPDATE olddata SET priorres = 'yes';"""
+            		cursor.execute( tobedone )
+            		tobedone = """UPDATE olddata SET datemovedin = '2015' where datemovedin is NULL;"""
+            		cursor.execute( tobedone )
+		        conn.commit()
+
+	def insertdatafreshdatanomembers (self, databaseused):
+		print "this is it"
+		with sqlite3.connect( databaseused ) as conn:
+            		cursor = conn.cursor()
+			tobedone = """insert into freshdatanomembers ('pd','eno','firstname','surname','fulladdress','street','address_1','address_2','address_3','address_4','address_5','address_6','address_7','v12','v14','green','intent','surveyn','knocked','other1','other2','datemovedin','priorres') 
+select councildata.pd, councildata.eno, councildata.firstname, councildata.surname, councildata.fulladdress, councildata.street, councildata.address_1, councildata.address_2,councildata.address_3,councildata.address_4,councildata.address_5,councildata.address_6,councildata.address_7,
+olddata.v12, olddata.v14, olddata.green, olddata.intent, olddata.surveyn, olddata.knocked, olddata.other1, olddata.other2, olddata.datemovedin, olddata.priorres 
+from councildata 
+left outer join olddata on councildata.firstname = olddata.firstname and councildata.surname = olddata.surname and councildata.address_1 = olddata.address_1;"""
+            		cursor.execute( tobedone )
+		        conn.commit()
+
+
+	def priorresupdate2 (self, databaseused):
+		with sqlite3.connect( databaseused ) as conn:
+            		cursor = conn.cursor()
+            		tobedone = """UPDATE freshdatanomembers SET datemovedin = '2015' where priorres IS NOT 'yes';"""
+            		cursor.execute( tobedone )
+		        conn.commit()
+            		tobedone = """UPDATE freshdatanomembers SET priorres = 'no' where datemovedin is '2015';"""
+            		cursor.execute( tobedone )
+		        conn.commit()
+
+	def removeduplicates (self, databaseused):
+		with sqlite3.connect( databaseused ) as conn:
+            		cursor = conn.cursor()
+            		tobedone = """delete from freshdata1 where rowid not in (select min(rowid) from freshdata1 group by firstname, surname, address_1);"""
+            		cursor.execute( tobedone )
+		        conn.commit()
+
+	def makemembersdatawork (self, databaseused):
+		with sqlite3.connect( databaseused ) as conn:
+            		cursor = conn.cursor()
+            		tobedone = """ALTER TABLE membersdata add column partymember;"""
+            		cursor.execute( tobedone )
+            		tobedone = """ALTER TABLE membersdata add column street;"""
+            		cursor.execute( tobedone )
+			tobedone = """UPDATE membersdata SET partymember = 'yes';"""
+			cursor.execute ( tobedone )
+			tobedone = """UPDATE membersdata SET postcode = upper(postcode;"""
+			cursor.execute ( tobedone )
+		        conn.commit()
+
+	def insertintofreshdatamembers (self, databaseused):
+		print "well this won't work yet"
