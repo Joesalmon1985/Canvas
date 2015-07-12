@@ -141,6 +141,7 @@ class CouncilUpdate:
         
     def findcouncildata (self, databaseused):
         for files in glob.glob("*.csv"):
+            print files
             importcsvfile.importcsvfile (files,databaseused)
             
     # This def adds data to the councilful table 
