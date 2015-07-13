@@ -25,10 +25,8 @@ class T( unittest.TestCase ):
             cursor.execute ( torun )
             r = cursor.fetchone ( )
             foundfreshdatanomembers = r [0]
-            print foundfreshdatanomembers
-            testran = 1
-            self.assertEqual(0, foundfreshdatanomembers, 'A table was not created')
-            self.assertEqual(1, testran, 'The test ran okay')
+        #print foundfreshdatanomembers
+        self.assertEqual(0, foundfreshdatanomembers, 'A table was not created')
 
 # tests the def that creates the table containing all the council & past canvassing data, without members shown.
     def test_createfreshdatanomembers (self):
