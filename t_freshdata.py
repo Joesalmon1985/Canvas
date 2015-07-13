@@ -264,6 +264,7 @@ class T( unittest.TestCase ):
             torun = """INSERT INTO olddata (firstname, surname, address_1, address_2, v12, v14, v15, green, intent, surveyn, knocked, other1, other2)
 VALUES ('Sandy', 'More', '34 Fun street', 'LS4 1EP', 'Somedata','Somedata','Somedata','Somedata','Somedata','Somedata','Somedata','Somedata','Somedata')"""
             cursor.execute( torun )
+            conn.commit ( )
             fd.priorresupdate1 ( naDataBase  )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
@@ -325,6 +326,7 @@ VALUES ('Daisy', 'Dares', '54 Fun street', 'LS1 14P', 'Leeds','Again','Somedata'
             cursor.execute( torun)
             torun = """INSERT INTO freshdatanomembers (firstname, surname, address_1, address_2, v12, v14, v15, green, intent, surveyn, knocked, other1, other2) VALUES ('Sandy', 'More', '34 Fun street', 'LS4 1EP', 'Somedata','Somedata','Somedata','Somedata','Somedata','Somedata','Somedata','Somedata','Somedata')"""
             cursor.execute( torun )
+            conn.commit ( )
             fd.priorresupdate2 ( naDataBase  )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
