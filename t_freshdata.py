@@ -167,17 +167,17 @@ class T( unittest.TestCase ):
             torun = '''select * from olddata'''
             cursor.execute( torun )
             r = cursor.fetchone ( )
-            print r
-            check1 = r[0]
-            check2 = r[1]
-            check3 = r[2]
-            check4 = r[10]
-            check5 = r[11]
-            print check1
-            print check2
-            print check3
-            print check4
-            print check5
+        #print r
+        check1 = r[0]
+        check2 = r[1]
+        check3 = r[2]
+        check4 = r[10]
+        check5 = r[11]
+        print check1
+        print check2
+        print check3
+        print check4
+        print check5
         self.assertEqual('HEA', check1, 'The data has not been imported right'  )
         self.assertEqual('25', check2, 'The data has not been imported right'   )
         self.assertEqual('D', check3, 'The data has not been imported right'    )
