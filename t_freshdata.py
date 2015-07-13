@@ -37,9 +37,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from freshdatanomembers"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundfreshdatanomembers = r [0]
-            print foundfreshdatanomembers
-            self.assertEqual(0, foundfreshdatanomembers, 'The table was created')
+        foundfreshdatanomembers = r [0]
+        #print foundfreshdatanomembers
+        self.assertEqual(0, foundfreshdatanomembers, 'The table was created')
 
 # tests the def that creates the table containing all the council & past canvassing data, with members shown.
     def test_createfreshdatamembers (self):
@@ -50,9 +50,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from freshdatamembers"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundfreshdatamembers = r [0]
-            print foundfreshdatamembers
-            self.assertEqual(0, foundfreshdatamembers, 'The table was created')
+        foundfreshdatamembers = r [0]
+        #print foundfreshdatamembers
+        self.assertEqual(0, foundfreshdatamembers, 'The table was created')
 
 # tests the def that creates the table containing all the council & past canvassing data, with members shown, and no halls of residence
     def test_createfreshdatanohalls (self):
@@ -63,9 +63,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from freshdatanohalls"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundfreshdatanohalls = r [0]
-            print foundfreshdatanohalls
-            self.assertEqual(0, foundfreshdatanohalls, 'The table was created')
+        foundfreshdatanohalls = r [0]
+        #print foundfreshdatanohalls
+        self.assertEqual(0, foundfreshdatanohalls, 'The table was created')
 
 # tests the def that creates the table containing all the council & past canvassing data, with members shown, and no halls of residence or flats
     def test_createfreshdatanohallsnoflat (self):
@@ -76,9 +76,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from freshdatanohallsnoflat"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundfreshdatanohallsnoflat = r [0]
-            print foundfreshdatanohallsnoflat
-            self.assertEqual(0, foundfreshdatanohallsnoflat, 'The table was created')
+        foundfreshdatanohallsnoflat = r [0]
+        #print foundfreshdatanohallsnoflat
+        self.assertEqual(0, foundfreshdatanohallsnoflat, 'The table was created')
 
 # tests the def that creates the table containing all the members data
     def test_createmembersdata (self):
@@ -89,9 +89,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from membersdata"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundmembersdata = r [0]
-            print foundmembersdata
-            self.assertEqual(0, foundmembersdata, 'The table was created')
+        foundmembersdata = r [0]
+        #print foundmembersdata
+        self.assertEqual(0, foundmembersdata, 'The table was created')
 
 # tests the def that creates the table containing council data
     def test_createcouncildata (self):
@@ -102,9 +102,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from councildata"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundcouncildata = r [0]
-            print foundcouncildata
-            self.assertEqual(0, foundcouncildata, 'The table was created')
+        foundcouncildata = r [0]
+        #print foundcouncildata
+        self.assertEqual(0, foundcouncildata, 'The table was created')
 
 # tests the def that creates the table containing old canvassing data
     def test_createolddata (self):
@@ -115,9 +115,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from olddata"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundolddata = r [0]
-            print foundolddata
-            self.assertEqual(0, foundolddata, 'The table was created')
+        foundolddata = r [0]
+        #print foundolddata
+        self.assertEqual(0, foundolddata, 'The table was created')
 
 # tests the def that creates the table used for student hall data removal
     def test_createstudent1 (self):
@@ -128,9 +128,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from student1"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundstudent1 = r [0]
-            print foundstudent1
-            self.assertEqual(0, foundstudent1, 'The table was created')
+        foundstudent1 = r [0]
+        #print foundstudent1
+        self.assertEqual(0, foundstudent1, 'The table was created')
 
 # tests the def that creates the table used for student hall data removal
     def test_createstudent2 (self):
@@ -141,9 +141,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from student2"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundstudent2 = r [0]
-            print foundstudent2
-            self.assertEqual(0, foundstudent2, 'The table was created')
+        foundstudent2 = r [0]
+        #print foundstudent2
+        self.assertEqual(0, foundstudent2, 'The table was created')
 
 # tests the def that creates the table used for student hall data removal
     def test_createstudent3 (self):
@@ -154,9 +154,9 @@ class T( unittest.TestCase ):
             torun = """select count (*) from student3"""
             cursor.execute ( torun )
             r = cursor.fetchone ( )
-            foundstudent3 = r [0]
-            print foundstudent3
-            self.assertEqual(0, foundstudent3, 'The table was created')
+        foundstudent3 = r [0]
+        #print foundstudent3
+        self.assertEqual(0, foundstudent3, 'The table was created')
 
             # tests the def that imports the past canvassing data from a csv file.
     def test_importolddatacsv (self):
