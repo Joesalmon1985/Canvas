@@ -333,7 +333,7 @@ VALUES ('Daisy', 'Dares', '54 Fun street', 'LS1 14P', 'Leeds','Again','Somedata'
             torun = '''select datemovedin, priorres, firstname from freshdatanomembers'''
             cursor.execute( torun )
             r = cursor.fetchone ( )
-            print r
+            #print r
             check1 = r[0]
             print check1
             check2 = r[1]
