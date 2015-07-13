@@ -13,7 +13,6 @@ naOldDatacsv = 'testmeold.csv'
 naCouncilDatacsv = 'testcouncildata.csv'
 naMemberDatacsv = 'testmemberdata.csv' 
 
-
 class T( unittest.TestCase ):
 
  # Tests the def that runs all the file creation defs. I can't think of a way to test this beyond just trying to run the def, or all of the tests that have been run already.
@@ -255,7 +254,6 @@ class T( unittest.TestCase ):
 #           print r
 #           check1 = r[0]
 #       self.assertEqual('Somedata', check1, 'The data has not been imported right' )
-            
 
 # tests the def that updates the prior res info on old data
     def test_priorresupdate1 (self):
@@ -289,7 +287,6 @@ VALUES ('Sandy', 'More', '34 Fun street', 'LS4 1EP', 'Somedata','Somedata','Some
         self.assertEqual('2015', check2, 'a blank date has not been filled' )
         self.assertEqual('yes', check3, 'The prior res has not been set to yes' )
 
-
 # tests the def that adds data to freshdatanomembers
     def test_insertdatafreshdatanomembers (self):
         fd = FreshData ( )
@@ -320,8 +317,6 @@ VALUES ('Daisy', 'Dares', '54 Fun street', 'LS1 14P', 'Leeds','Again','Somedata'
         print check2
         self.assertEqual('Roger', check1, 'The data has not been imported right'    )
         self.assertEqual('yes', check2, 'The prior res status has been lost'    )
-
-
 
 # tests the def that updates the prior res info on freshdatanomembers data
     def test_priorresupdate2 (self):
@@ -388,8 +383,6 @@ VALUES ('Sandy', 'More','LS4 1EP', 'sandy@internet','07446543978')"""
         cursor.execute( tobedone)
         self.assertEqual('none', check1, 'The street column is not added'   )
         self.assertEqual('yes', check2, 'The party member column is not added'  )
-        
-
 
 #       insert into freshdata2 (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, priorres, v12, v14, green, intent, surveyn, knocked, other1, other2, yearmovedin, partymember) 
 # select freshdata1.pd, freshdata1.eno, freshdata1.firstname, freshdata1.surname, freshdata1.fulladdress, freshdata1.street, freshdata1.address_1, freshdata1.address_2, freshdata1.address_3, freshdata1.address_4, freshdata1.address_5, freshdata1.address_6, freshdata1.address_7, freshdata1.priorres, freshdata1.v12, freshdata1.v14, freshdata1.green, freshdata1.intent, freshdata1.surveyn, freshdata1.knocked, freshdata1.other1, freshdata1.other2, freshdata1.yearmovedin, streetmembers.partymember
