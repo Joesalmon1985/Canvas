@@ -139,7 +139,6 @@ class FreshData:
             cursor.execute( tobedone )
             conn.commit()
 
-
     def createfreshdatanohallsnoflat (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
@@ -217,8 +216,6 @@ class FreshData:
       '''
                 cursor.execute( tobedone )
                 conn.commit()
-            
-            
         
     def createolddata (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
@@ -292,7 +289,6 @@ class FreshData:
       '''
                 cursor.execute( tobedone )
                 conn.commit()
-            
                     
     def createstudent2 (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
@@ -441,7 +437,6 @@ class FreshData:
         print thing
         print "nothing here yet"
 
-
     def olddataextracol (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
@@ -469,7 +464,6 @@ from councildata
 left outer join olddata on councildata.firstname = olddata.firstname and councildata.surname = olddata.surname and councildata.address_1 = olddata.address_1;"""
                     cursor.execute( tobedone )
                 conn.commit()
-
 
     def priorresupdate2 (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
