@@ -10,74 +10,74 @@ import importcsvfile
 class FreshData:
 
     # This def creates the required tables
-	def createfreshfiles (self, databaseused):
-	    	print "creating required tables"
-		fd = FreshData ( )
-	    	fd.createfreshdatanomembers (databaseused)
-	    	fd.createfreshdatamembers (databaseused)
-	    	fd.createmembersdata (databaseused)
-	    	fd.createfreshdatanohalls (databaseused)
-	    	fd.createfreshdatanohallsnoflat (databaseused)
-	    	fd.createcouncildata (databaseused)
-	    	fd.createolddata (databaseused)
-	    	fd.createstudent1 (databaseused)
-	    	fd.createstudent2 (databaseused)
-	    	fd.createstudent3 (databaseused)
+    def createfreshfiles (self, databaseused):
+            print "creating required tables"
+        fd = FreshData ( )
+            fd.createfreshdatanomembers (databaseused)
+            fd.createfreshdatamembers (databaseused)
+            fd.createmembersdata (databaseused)
+            fd.createfreshdatanohalls (databaseused)
+            fd.createfreshdatanohallsnoflat (databaseused)
+            fd.createcouncildata (databaseused)
+            fd.createolddata (databaseused)
+            fd.createstudent1 (databaseused)
+            fd.createstudent2 (databaseused)
+            fd.createstudent3 (databaseused)
 
-	def uppercasememberpostcode (self, databaseused):
-		print "nothing done yet"
-	    	
-	    
-	def updateyearmoved (self, databaseused):
-		print "nothing done yet"
-	  
+    def uppercasememberpostcode (self, databaseused):
+        print "nothing done yet"
+            
+        
+    def updateyearmoved (self, databaseused):
+        print "nothing done yet"
+      
 
   
-	def insertintofreshdatanomembers (self, databaseused):
-		print "nothing done yet"
+    def insertintofreshdatanomembers (self, databaseused):
+        print "nothing done yet"
 
-	def importmemberdatacsv (self, databaseused, membercsv):
-		importcsvfile.importcsvfile (membercsv, databaseused)
-		with sqlite3.connect( databaseused ) as conn:
-			cursor = conn.cursor()
-			tobedone = """INSERT INTO membersdata SELECT * from '%s';""" % (membercsv)
-			cursor.execute( tobedone )
-			conn.commit()
+    def importmemberdatacsv (self, databaseused, membercsv):
+        importcsvfile.importcsvfile (membercsv, databaseused)
+        with sqlite3.connect( databaseused ) as conn:
+            cursor = conn.cursor()
+            tobedone = """INSERT INTO membersdata SELECT * from '%s';""" % (membercsv)
+            cursor.execute( tobedone )
+            conn.commit()
 
-	def importcouncildatacsv (self, databaseused, councilcsv):
-		importcsvfile.importcsvfile (councilcsv, databaseused)
-		with sqlite3.connect( databaseused ) as conn:
-			cursor = conn.cursor()
-			tobedone = """INSERT INTO councildata SELECT * from '%s';""" % (councilcsv)
-			cursor.execute( tobedone )
-			conn.commit()
+    def importcouncildatacsv (self, databaseused, councilcsv):
+        importcsvfile.importcsvfile (councilcsv, databaseused)
+        with sqlite3.connect( databaseused ) as conn:
+            cursor = conn.cursor()
+            tobedone = """INSERT INTO councildata SELECT * from '%s';""" % (councilcsv)
+            cursor.execute( tobedone )
+            conn.commit()
 
-	def importcouncildatasql (self, databaseused):
-		print "nothing done yet"
+    def importcouncildatasql (self, databaseused):
+        print "nothing done yet"
 
-	def importolddatacsv (self, databaseused, oldcsv):
-		importcsvfile.importcsvfile (oldcsv, databaseused)
-		with sqlite3.connect( databaseused ) as conn:
-			cursor = conn.cursor()
-			tobedone = """INSERT INTO olddata SELECT * from '%s';""" % (oldcsv)
-			cursor.execute( tobedone )
-			conn.commit()
+    def importolddatacsv (self, databaseused, oldcsv):
+        importcsvfile.importcsvfile (oldcsv, databaseused)
+        with sqlite3.connect( databaseused ) as conn:
+            cursor = conn.cursor()
+            tobedone = """INSERT INTO olddata SELECT * from '%s';""" % (oldcsv)
+            cursor.execute( tobedone )
+            conn.commit()
 
-		
+        
 
-	def importolddatasql (self, databaseused):
-		print "nothing done yet"
+    def importolddatasql (self, databaseused):
+        print "nothing done yet"
 
-	def insertintofreshdatamembers (self, databaseused):
-		print "nothing done yet"
+    def insertintofreshdatamembers (self, databaseused):
+        print "nothing done yet"
                     
-	def createfreshdatanomembers (self, databaseused):
-		with sqlite3.connect( databaseused ) as conn:
-				cursor = conn.cursor()
-				tobedone = 'DROP TABLE if exists freshdatanomembers;'
-				cursor.execute( tobedone )
-				conn.commit()
-				tobedone = '''CREATE TABLE freshdatanomembers(
+    def createfreshdatanomembers (self, databaseused):
+        with sqlite3.connect( databaseused ) as conn:
+                cursor = conn.cursor()
+                tobedone = 'DROP TABLE if exists freshdatanomembers;'
+                cursor.execute( tobedone )
+                conn.commit()
+                tobedone = '''CREATE TABLE freshdatanomembers(
   "pd" TEXT,
   "eno" TEXT,
   "firstname" TEXT,
