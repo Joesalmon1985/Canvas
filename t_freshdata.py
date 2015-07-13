@@ -309,7 +309,6 @@ VALUES ('Daisy', 'Dares', '54 Fun street', 'LS1 14P', 'Leeds','Again','Somedata'
         torun = """SELECT firstname, priorres from freshdatanomembers;"""
         cursor.execute( torun )
         r = cursor.fetchone (  )
-        print r
         check1 = r [0]
         check2 = r [1]
         print check1
