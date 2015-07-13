@@ -11,7 +11,7 @@ class FreshData:
 
     # This def creates the required tables
     def createfreshfiles (self, databaseused):
-        print "creating required tables"
+        #print "creating required tables"
         self.createfreshdatanomembers (databaseused)
         self.createfreshdatamembers (databaseused)
         self.createmembersdata (databaseused)
