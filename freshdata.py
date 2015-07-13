@@ -12,17 +12,16 @@ class FreshData:
     # This def creates the required tables
     def createfreshfiles (self, databaseused):
         print "creating required tables"
-        fd = FreshData ( )
-        fd.createfreshdatanomembers (databaseused)
-        fd.createfreshdatamembers (databaseused)
-        fd.createmembersdata (databaseused)
-        fd.createfreshdatanohalls (databaseused)
-        fd.createfreshdatanohallsnoflat (databaseused)
-        fd.createcouncildata (databaseused)
-        fd.createolddata (databaseused)
-        fd.createstudent1 (databaseused)
-        fd.createstudent2 (databaseused)
-        fd.createstudent3 (databaseused)
+        self.createfreshdatanomembers (databaseused)
+        self.createfreshdatamembers (databaseused)
+        self.createmembersdata (databaseused)
+        self.createfreshdatanohalls (databaseused)
+        self.createfreshdatanohallsnoflat (databaseused)
+        self.createcouncildata (databaseused)
+        self.createolddata (databaseused)
+        self.createstudent1 (databaseused)
+        self.createstudent2 (databaseused)
+        self.createstudent3 (databaseused)
 
     def uppercasememberpostcode (self, databaseused):
         print "nothing done yet"
