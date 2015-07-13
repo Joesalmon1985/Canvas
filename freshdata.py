@@ -453,7 +453,7 @@ class FreshData:
             conn.commit()
 
     def insertdatafreshdatanomembers (self, databaseused):
-        print "this is it"
+        #print "this is it"
         with sqlite3.connect( databaseused ) as conn:
             cursor = conn.cursor()
             tobedone = """insert into freshdatanomembers ('pd','eno','firstname','surname','fulladdress','street','address_1','address_2','address_3','address_4','address_5','address_6','address_7','v12','v14','green','intent','surveyn','knocked','other1','other2','datemovedin','priorres')
