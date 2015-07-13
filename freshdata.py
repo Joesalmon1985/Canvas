@@ -26,10 +26,10 @@ class FreshData:
 
     def uppercasememberpostcode (self, databaseused):
         print "nothing done yet"
-        
+
     def updateyearmoved (self, databaseused):
         print "nothing done yet"
-  
+
     def insertintofreshdatanomembers (self, databaseused):
         print "nothing done yet"
 
@@ -65,7 +65,7 @@ class FreshData:
 
     def insertintofreshdatamembers (self, databaseused):
         print "nothing done yet"
-                    
+
     def createfreshdatanomembers (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                 cursor = conn.cursor()
@@ -102,7 +102,7 @@ class FreshData:
       '''
                 cursor.execute( tobedone )
                 conn.commit()
-        
+
     def createfreshdatamembers (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
             cursor = conn.cursor()
@@ -174,7 +174,7 @@ class FreshData:
       '''
                 cursor.execute( tobedone )
                 conn.commit()
-            
+
     def createmembersdata (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
@@ -216,7 +216,7 @@ class FreshData:
       '''
                 cursor.execute( tobedone )
                 conn.commit()
-        
+
     def createolddata (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
@@ -253,7 +253,7 @@ class FreshData:
       '''
                 cursor.execute( tobedone )
                 conn.commit()
-            
+
     def createstudent1 (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
@@ -289,7 +289,7 @@ class FreshData:
       '''
                 cursor.execute( tobedone )
                 conn.commit()
-                    
+
     def createstudent2 (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
@@ -325,7 +325,7 @@ class FreshData:
       '''
                 cursor.execute( tobedone )
                 conn.commit()
-            
+
     def createstudent3 (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
@@ -443,7 +443,7 @@ class FreshData:
                     tobedone = '''ALTER TABLE olddata add column v12;'''
                     cursor.execute( tobedone )
                 conn.commit()
-    
+
     def priorresupdate1 (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
@@ -457,10 +457,10 @@ class FreshData:
         print "this is it"
         with sqlite3.connect( databaseused ) as conn:
                     cursor = conn.cursor()
-            tobedone = """insert into freshdatanomembers ('pd','eno','firstname','surname','fulladdress','street','address_1','address_2','address_3','address_4','address_5','address_6','address_7','v12','v14','green','intent','surveyn','knocked','other1','other2','datemovedin','priorres') 
+            tobedone = """insert into freshdatanomembers ('pd','eno','firstname','surname','fulladdress','street','address_1','address_2','address_3','address_4','address_5','address_6','address_7','v12','v14','green','intent','surveyn','knocked','other1','other2','datemovedin','priorres')
 select councildata.pd, councildata.eno, councildata.firstname, councildata.surname, councildata.fulladdress, councildata.street, councildata.address_1, councildata.address_2,councildata.address_3,councildata.address_4,councildata.address_5,councildata.address_6,councildata.address_7,
-olddata.v12, olddata.v14, olddata.green, olddata.intent, olddata.surveyn, olddata.knocked, olddata.other1, olddata.other2, olddata.datemovedin, olddata.priorres 
-from councildata 
+olddata.v12, olddata.v14, olddata.green, olddata.intent, olddata.surveyn, olddata.knocked, olddata.other1, olddata.other2, olddata.datemovedin, olddata.priorres
+from councildata
 left outer join olddata on councildata.firstname = olddata.firstname and councildata.surname = olddata.surname and councildata.address_1 = olddata.address_1;"""
                     cursor.execute( tobedone )
                 conn.commit()
