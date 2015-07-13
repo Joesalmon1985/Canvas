@@ -16,9 +16,9 @@ naMemberDatacsv = 'testmemberdata.csv'
 class T( unittest.TestCase ):
 
  # Tests the def that runs all the file creation defs. I can't think of a way to test this beyond just trying to run the def, or all of the tests that have been run already.
-        def test_createfreshfiles (self):
-            fd = FreshData ( )
-            fd.createfreshfiles ( naDataBase )
+    def test_createfreshfiles (self):
+        fd = FreshData ( )
+        fd.createfreshfiles ( naDataBase )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from freshdatanomembers"""
@@ -32,8 +32,8 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table containing all the council & past canvassing data, without members shown.
     def test_createfreshdatanomembers (self):
-            fd = FreshData ( )
-            fd.createfreshdatanomembers ( naDataBase )
+        fd = FreshData ( )
+        fd.createfreshdatanomembers ( naDataBase )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from freshdatanomembers"""
@@ -45,8 +45,8 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table containing all the council & past canvassing data, with members shown.
     def test_createfreshdatamembers (self):
-            fd = FreshData ( )
-            fd.createfreshdatamembers ( naDataBase )
+        fd = FreshData ( )
+        fd.createfreshdatamembers ( naDataBase )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from freshdatamembers"""
@@ -58,9 +58,9 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table containing all the council & past canvassing data, with members shown, and no halls of residence
     def test_createfreshdatanohalls (self):
-            fd = FreshData ( )
-            fd.createfreshdatanohalls ( naDataBase )
-            with sqlite3.connect( naDataBase ) as conn:
+        fd = FreshData ( )
+        fd.createfreshdatanohalls ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from freshdatanohalls"""
             cursor.execute ( torun )
@@ -71,9 +71,9 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table containing all the council & past canvassing data, with members shown, and no halls of residence or flats
     def test_createfreshdatanohallsnoflat (self):
-            fd = FreshData ( )
-            fd.createfreshdatanohallsnoflat ( naDataBase )
-            with sqlite3.connect( naDataBase ) as conn:
+        fd = FreshData ( )
+        fd.createfreshdatanohallsnoflat ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from freshdatanohallsnoflat"""
             cursor.execute ( torun )
@@ -84,9 +84,9 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table containing all the members data
     def test_createmembersdata (self):
-            fd = FreshData ( )
-            fd.createmembersdata ( naDataBase )
-            with sqlite3.connect( naDataBase ) as conn:
+        fd = FreshData ( )
+        fd.createmembersdata ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from membersdata"""
             cursor.execute ( torun )
@@ -97,9 +97,9 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table containing council data
     def test_createcouncildata (self):
-            fd = FreshData ( )
-            fd.createcouncildata ( naDataBase )
-            with sqlite3.connect( naDataBase ) as conn:
+        fd = FreshData ( )
+        fd.createcouncildata ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from councildata"""
             cursor.execute ( torun )
@@ -110,9 +110,9 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table containing old canvassing data
     def test_createolddata (self):
-            fd = FreshData ( )
-            fd.createolddata ( naDataBase )
-            with sqlite3.connect( naDataBase ) as conn:
+        fd = FreshData ( )
+        fd.createolddata ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from olddata"""
             cursor.execute ( torun )
@@ -123,9 +123,9 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table used for student hall data removal
     def test_createstudent1 (self):
-            fd = FreshData ( )
-            fd.createstudent1 ( naDataBase )
-            with sqlite3.connect( naDataBase ) as conn:
+        fd = FreshData ( )
+        fd.createstudent1 ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from student1"""
             cursor.execute ( torun )
@@ -136,9 +136,9 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table used for student hall data removal
     def test_createstudent2 (self):
-            fd = FreshData ( )
-            fd.createstudent2 ( naDataBase )
-            with sqlite3.connect( naDataBase ) as conn:
+        fd = FreshData ( )
+        fd.createstudent2 ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from student2"""
             cursor.execute ( torun )
@@ -149,9 +149,9 @@ class T( unittest.TestCase ):
 
 # tests the def that creates the table used for student hall data removal
     def test_createstudent3 (self):
-            fd = FreshData ( )
-            fd.createstudent3 ( naDataBase )
-            with sqlite3.connect( naDataBase ) as conn:
+        fd = FreshData ( )
+        fd.createstudent3 ( naDataBase )
+        with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = """select count (*) from student3"""
             cursor.execute ( torun )
@@ -162,8 +162,8 @@ class T( unittest.TestCase ):
 
             # tests the def that imports the past canvassing data from a csv file.
     def test_importolddatacsv (self):
-            fd = FreshData ( )
-            fd.importolddatacsv ( naDataBase, naOldDatacsv  )
+        fd = FreshData ( )
+        fd.importolddatacsv ( naDataBase, naOldDatacsv  )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = '''select * from olddata'''
@@ -188,8 +188,8 @@ class T( unittest.TestCase ):
 
 # tests the def that imports the council data from a csv
     def test_importcouncildatacsv (self):
-            fd = FreshData ( )
-            fd.importcouncildatacsv ( naDataBase, naCouncilDatacsv  )
+        fd = FreshData ( )
+        fd.importcouncildatacsv ( naDataBase, naCouncilDatacsv  )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = '''select * from councildata'''
@@ -214,8 +214,8 @@ class T( unittest.TestCase ):
 
 # tests the def that imports the member data from a csv
     def test_importmemberdatacsv (self):
-            fd = FreshData ( )
-            fd.importmemberdatacsv ( naDataBase, naMemberDatacsv  )
+        fd = FreshData ( )
+        fd.importmemberdatacsv ( naDataBase, naMemberDatacsv  )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
             torun = '''select * from membersdata'''
@@ -256,8 +256,9 @@ class T( unittest.TestCase ):
 #       self.assertEqual('Somedata', check1, 'The data has not been imported right' )
 
 # tests the def that updates the prior res info on old data
+
     def test_priorresupdate1 (self):
-            fd = FreshData ( )
+        fd = FreshData ( )
         fd.createfreshfiles ( naDataBase )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
@@ -320,7 +321,7 @@ VALUES ('Daisy', 'Dares', '54 Fun street', 'LS1 14P', 'Leeds','Again','Somedata'
 
 # tests the def that updates the prior res info on freshdatanomembers data
     def test_priorresupdate2 (self):
-            fd = FreshData ( )
+        fd = FreshData ( )
         fd.createfreshfiles ( naDataBase )
         with sqlite3.connect( naDataBase ) as conn:
             cursor = conn.cursor()
