@@ -26,12 +26,9 @@ class FreshData:
 
     def uppercasememberpostcode (self, databaseused):
         print "nothing done yet"
-            
         
     def updateyearmoved (self, databaseused):
         print "nothing done yet"
-      
-
   
     def insertintofreshdatanomembers (self, databaseused):
         print "nothing done yet"
@@ -62,8 +59,6 @@ class FreshData:
             tobedone = """INSERT INTO olddata SELECT * from '%s';""" % (oldcsv)
             cursor.execute( tobedone )
             conn.commit()
-
-        
 
     def importolddatasql (self, databaseused):
         print "nothing done yet"
