@@ -309,12 +309,10 @@ VALUES ('Daisy', 'Dares', '54 Fun street', 'LS1 14P', 'Leeds','Again','Somedata'
         torun = """SELECT firstname, priorres from freshdatanomembers;"""
         cursor.execute( torun )
         r = cursor.fetchone (  )
-        check1 = r [0]
         check2 = r [1]
-        print check1
         print check2
-        self.assertEqual('Roger', check1, 'The data has not been imported right'    )
         self.assertEqual('yes', check2, 'The prior res status has been lost'    )
+        self.assertEqual('Roger', r[ 0 ], 'The data have not been imported right'    )
 
 # tests the def that updates the prior res info on freshdatanomembers data
     def test_priorresupdate2 (self):
