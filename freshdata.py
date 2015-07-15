@@ -507,6 +507,10 @@ left outer join olddata on councildata.firstname = olddata.firstname and council
     def makemembersdatawork (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
             cursor = conn.cursor()
+            if not FreshData.fColumnInTable( self, cursor, 'postcode', 'membersdata' ):
+                #throw ?
+                return
+
             tobedone = """ALTER TABLE membersdata add column partymember;"""
             cursor.execute( tobedone )
             tobedone = """ALTER TABLE membersdata add column street;"""
