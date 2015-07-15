@@ -337,6 +337,7 @@ VALUES ('Daisy', 'Dares', '54 Fun street', 'LS1 14P', 'Leeds','Again','Somedata'
         fd.makemembersdatawork ( naDataBase )
         with sqlite3.connect ( naDataBase ) as conn:
             cursor = conn.cursor()
+            self.assertTrue( fd.fColumnInTable( cursor, 'street', 'membersdata' ), "The 'membersdata' TABLE should have a COLUMN 'street'" )
             tobedone = """SELECT street from membersdata;"""
             cursor.execute( tobedone )
             r = cursor.fetchone ( )
