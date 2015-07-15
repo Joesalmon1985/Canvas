@@ -490,7 +490,7 @@ left outer join olddata on councildata.firstname = olddata.firstname and council
             cursor.execute( tobedone )
             tobedone = """UPDATE membersdata SET partymember = 'yes';"""
             cursor.execute ( tobedone )
-            tobedone = """UPDATE membersdata SET postcode = upper(postcode;"""
+            tobedone = """UPDATE membersdata SET postcode = UPPER( postcode )"""
             cursor.execute ( tobedone )
             conn.commit()
 
