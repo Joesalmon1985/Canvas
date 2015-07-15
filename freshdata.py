@@ -6,6 +6,7 @@ import glob
 import re
 import sqlite3
 import importcsvfile
+import inspect
 
 class FreshData:
 
@@ -33,7 +34,12 @@ class FreshData:
         print "nothing done yet"
 
     def importmemberdatacsv (self, databaseused, membercsv):
+        print inspect.stack()[0][3], "( ", databaseused, ", ", membercsv, " ): "
         importcsvfile.importcsvfile (membercsv, databaseused)
+        if not databaseused.endswith( ".db" ):
+            print inspect.stack()[0][3], "( ): Expected a DB file, got ", databaseused
+            # throw?
+            return
         with sqlite3.connect( databaseused ) as conn:
             cursor = conn.cursor()
             tobedone = """INSERT INTO membersdata SELECT * from '%s';""" % (membercsv)
