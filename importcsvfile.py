@@ -9,7 +9,6 @@ import sqlite3
 import csv
 import re
 import os
-from os.path import basename
 
 # global variables
 naFileCSV = ''
