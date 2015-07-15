@@ -61,6 +61,14 @@ class FreshData:
         importcsvfile.importcsvfile (oldcsv, databaseused)
         with sqlite3.connect( databaseused ) as conn:
             cursor = conn.cursor()
+            cursor.execute( 'PRAGMA TABLE_INFO({})'.format( 'olddata' ) )
+            cColsRequired = len( cursor.fetchall( ) )
+            cursor.execute( "PRAGMA TABLE_INFO( '%s' )" % oldcsv )
+            cColsProvided = len( cursor.fetchall( ) )
+            if cColsProvided < cColsRequired:
+                print "Not enough COLUMNs: %d > %d" % ( cColsRequired, cColsProvided )
+                # throw ?
+                return
             tobedone = """INSERT INTO olddata SELECT * from '%s';""" % (oldcsv)
             cursor.execute( tobedone )
             conn.commit()
