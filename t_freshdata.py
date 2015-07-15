@@ -167,6 +167,7 @@ class T( unittest.TestCase ):
             torun = '''select * from olddata'''
             cursor.execute( torun )
             r = cursor.fetchone ( )
+        self.assertIsNotNone( r )
         #print r
         check1 = r[0]
         check2 = r[1]
