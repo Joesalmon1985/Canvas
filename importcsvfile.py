@@ -98,6 +98,12 @@ def HeadingsFromCSV( ):
 
     # rb : means read, with binary mode ( see https://docs.python.org/2/library/csv.html#module-contents )
     # delimiter : ',' tells the reader to separate fields with commas
+    print naFileCSV
+    if not naFileCSV.endswith( ".csv" ):
+        print inspect.stack()[0][3], "( ): Expected a CSV file, got ", naFileCSV
+        # throw?
+        return
+
     with open( naFileCSV, 'rb' ) as f:
         filereader = csv.reader( f, delimiter=',' )
         for fdsa in filereader:
