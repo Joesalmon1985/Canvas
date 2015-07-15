@@ -495,6 +495,15 @@ left outer join olddata on councildata.firstname = olddata.firstname and council
             cursor.execute( tobedone )
             conn.commit()
 
+    def fColumnInTable( self, cursor, naCol, naTable ):
+        cursor.execute( 'PRAGMA TABLE_INFO({})'.format( naTable ) )
+        liCols = [tup[ 1 ] for tup in cursor.fetchall( )]
+        if naCol in liCols:
+            return True
+
+        print "No column '", naCol, "' got: ", liCols
+        return False
+
     def makemembersdatawork (self, databaseused):
         with sqlite3.connect( databaseused ) as conn:
             cursor = conn.cursor()
