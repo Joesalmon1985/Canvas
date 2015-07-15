@@ -9,6 +9,7 @@ import sqlite3
 import csv
 import re
 import os
+import inspect
 
 # global variables
 naFileCSV = ''
@@ -25,6 +26,11 @@ def importcsvfile ( csvfile, db ):    #import a csv file called 'csvfile' into a
     naTable = naFileCSV
 
     HeadingsFromCSV( )
+
+    if not naDataBase.endswith( ".db" ):
+        print inspect.stack()[0][3], "( ): Expected a DB file, got ", naDataBase
+        # throw?
+        return
 
     with sqlite3.connect( naDataBase ) as conn:
         cursor = conn.cursor()
