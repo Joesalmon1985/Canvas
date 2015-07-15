@@ -336,12 +336,12 @@ VALUES ('Daisy', 'Dares', '54 Fun street', 'LS1 14P', 'Leeds','Again','Somedata'
         with sqlite3.connect ( naDataBase ) as conn:
             cursor = conn.cursor()
             tobedone = """SELECT street from membersdata;"""
-            cursor.execute( torun )
+            cursor.execute( tobedone )
             r = cursor.fetchone ( )
             print r
             check1 = r[0]
             tobedone = """SELECT partymember from membersdata;"""
-            cursor.execute( torun )
+            cursor.execute( tobedone )
             r = cursor.fetchone ( )
             print r
             check2 = r[0]
