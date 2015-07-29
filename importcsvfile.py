@@ -9,7 +9,7 @@ import sqlite3
 import csv
 import re
 import os
-from os.path import basename
+import inspect
 
 # global variables
 naFileCSV = ''
@@ -26,6 +26,11 @@ def importcsvfile ( csvfile, db ):    #import a csv file called 'csvfile' into a
     naTable = naFileCSV
 
     HeadingsFromCSV( )
+
+    if not naDataBase.endswith( ".db" ):
+        print inspect.stack()[0][3], "( ): Expected a DB file, got ", naDataBase
+        # throw?
+        return
 
     with sqlite3.connect( naDataBase ) as conn:
         cursor = conn.cursor()
@@ -93,6 +98,12 @@ def HeadingsFromCSV( ):
 
     # rb : means read, with binary mode ( see https://docs.python.org/2/library/csv.html#module-contents )
     # delimiter : ',' tells the reader to separate fields with commas
+    print naFileCSV
+    if not naFileCSV.endswith( ".csv" ):
+        print inspect.stack()[0][3], "( ): Expected a CSV file, got ", naFileCSV
+        # throw?
+        return
+
     with open( naFileCSV, 'rb' ) as f:
         filereader = csv.reader( f, delimiter=',' )
         for fdsa in filereader:
