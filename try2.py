@@ -16,8 +16,8 @@ print """This has a go at using specified csv files as existing uptodate council
 
 # List of the different files of council data to be used, change this list to change the data that is used, as instructed in STEP 2.
 listcouncildata = [
-        "testmeold.csv",
-        "testcouncildata.csv"
+        "councilbig.csv",
+        "councildata.csv"
         ]
 
 # Name of the .db file used to store this new data, change this if you want as instructed in STEP 2.
@@ -52,6 +52,8 @@ with sqlite3.connect( databaseused ) as conn:
   "address_5" TEXT,
   "address_6" TEXT,
   "address_7" TEXT,
+  "subroad" TEXT,
+  "road" TEXT,
   "v12" TEXT,
   "v14" TEXT,
   "v15" TEXT,
@@ -72,7 +74,7 @@ for bit in listcouncildata:
     print "adding data to councilfull from %s" % (bit)
     with sqlite3.connect( databaseused ) as conn:
         cursor = conn.cursor()
-        tobedone = '''insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7, remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7, remove from %r where remove is not 'D';''' % (bit)
+        tobedone = '''insert into councilfullupdated (pd,eno,firstname,surname,fulladdress,address_1,address_2,address_3,address_4,address_5,address_6,address_7,subroad,road,remove) select pd,eno,firstname,surname,address1||address2||address3||address4||address5||address6||address7,address1,address2,address3,address4,address5,address6,address7,subroad,road,remove from %r where remove is not 'D';''' % (bit)
         cursor.execute( tobedone )
         conn.commit()
 
@@ -98,6 +100,8 @@ with sqlite3.connect( databaseused ) as conn:
   "address_5" TEXT,
   "address_6" TEXT,
   "address_7" TEXT,
+  "subroad" TEXT,
+  "road" TEXT,
   "remove" text
 );'''
     cursor.execute( tobedone )
@@ -111,7 +115,7 @@ print "adding to the toremove table"
 
 for bit in listcouncildata:
     print "adding data to the toremovetable from %s" % (bit)
-    tobedone = '''insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7
+    tobedone = '''insert into toremove (pd, eno, firstname, surname, address_1, address_2, address_3, address_4, address_5, address_6, address_7, subroad,road) select pd, eno, firstname, surname, address1, address2, address3, address4, address5, address6, address7, subroad,road
 from %r where remove is 'D';''' % (bit)
     cursor.execute( tobedone )
     conn.commit()
@@ -147,6 +151,8 @@ with sqlite3.connect( databaseused ) as conn:
   "address_5" TEXT,
   "address_6" TEXT,
   "address_7" TEXT,
+  "subroad" TEXT,
+  "road" TEXT,
   "v12" TEXT,
   "v14" TEXT,
   "v15" TEXT,
@@ -163,9 +169,9 @@ with sqlite3.connect( databaseused ) as conn:
 
 with sqlite3.connect( databaseused ) as conn:
     cursor = conn.cursor()
-    tobedone = '''insert into councilremovedupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7, remove) 
+    tobedone = '''insert into councilremovedupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7,subroad,road,remove) 
 select 
-councilfullupdated.pd, councilfullupdated.eno, councilfullupdated.firstname, councilfullupdated.surname, councilfullupdated.fulladdress, councilfullupdated.street, councilfullupdated.address_1, councilfullupdated.address_2, councilfullupdated.address_3, councilfullupdated.address_4, councilfullupdated.address_5, councilfullupdated.address_6, councilfullupdated.address_7, toremove.remove from councilfullupdated left outer join toremove on councilfullupdated.firstname = toremove.firstname and councilfullupdated.surname = toremove.surname and councilfullupdated.address_1 = toremove.address_1;'''
+councilfullupdated.pd, councilfullupdated.eno, councilfullupdated.firstname, councilfullupdated.surname, councilfullupdated.fulladdress, councilfullupdated.street, councilfullupdated.address_1, councilfullupdated.address_2, councilfullupdated.address_3, councilfullupdated.address_4, councilfullupdated.address_5, councilfullupdated.address_6, councilfullupdated.address_7, councilfullupdated.subroad,councilfullupdated.road, toremove.remove from councilfullupdated left outer join toremove on councilfullupdated.firstname = toremove.firstname and councilfullupdated.surname = toremove.surname and councilfullupdated.address_1 = toremove.address_1;'''
     cursor.execute( tobedone )
     conn.commit()
 
@@ -189,6 +195,8 @@ with sqlite3.connect( databaseused ) as conn:
   "address_5" TEXT,
   "address_6" TEXT,
   "address_7" TEXT,
+  "subroad" TEXT,
+  "road" TEXT,
   "v12" TEXT,
   "v14" TEXT,
   "v15" TEXT,
@@ -208,8 +216,8 @@ print "adding the final bit of data to councilupdated"
 
 with sqlite3.connect( databaseused ) as conn:
     cursor = conn.cursor()
-    tobedone = '''insert into councilupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7) 
-select pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7 from councilremovedupdated where remove is not 'remove';'''
+    tobedone = '''insert into councilupdated (pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7,subroad,road) 
+select pd, eno, firstname, surname, fulladdress, street, address_1, address_2, address_3, address_4, address_5, address_6, address_7,subroad,road from councilremovedupdated where remove is not 'remove';'''
     cursor.execute( tobedone )
     conn.commit()
 
@@ -246,13 +254,15 @@ with sqlite3.connect( databaseused ) as conn:
   "surname" TEXT,
   "fulladdress" TEXT,
   "street" TEXT,
-  "address_1" TEXT,
-  "address_2" TEXT,
-  "address_3" TEXT,
-  "address_4" TEXT,
-  "address_5" TEXT,
-  "address_6" TEXT,
-  "address_7" TEXT,
+  "address1" TEXT,
+  "address2" TEXT,
+  "address3" TEXT,
+  "address4" TEXT,
+  "address5" TEXT,
+  "address6" TEXT,
+  "address7" TEXT,
+  "subroad" TEXT,
+  "road" TEXT,
   "priorres" TEXT,
   "v12" TEXT,
   "v14" TEXT,
@@ -286,13 +296,69 @@ listoldcommands = [
 "update '%s' set priorres = 'yes';" % (existingcanvas) 
         ]
 
-for bit in listoldcommands:
-    with sqlite3.connect( databaseused ) as conn:
-        cursor = conn.cursor()
-        tobedone = '''%s''' % (bit)
-        print tobedone
-        cursor.execute( tobedone )
-        conn.commit()
+# This should add new columns if needed and update the person as a # prior resident. Currently not working as issue 37
+
+#for bit in listoldcommands:
+#    with sqlite3.connect( databaseused ) as conn:
+#        cursor = conn.cursor()
+#        tobedone = '''%s''' % (bit)
+#        print tobedone
+#        cursor.execute( tobedone )
+#        conn.commit()
+
+# the below is included to update the priorress to yes as it is
+# not done above.
+
+with sqlite3.connect( databaseused ) as conn:
+    cursor = conn.cursor()
+    tobedone = '''update '%s' set priorres = 'yes';''' % (existingcanvas)
+    cursor.execute( tobedone )
+    conn.commit()
+
+# This merges the council and existing data together into the
+# table freshdata1
+
+print "merging data into freshdata1"
+
+with sqlite3.connect( databaseused ) as conn:
+    cursor = conn.cursor()
+    tobedone = '''
+insert into freshdata1 (pd,eno,firstname,surname,fulladdress,street,address1,address2,address3,address4,address5,address6,address7,subroad,road,v12,v14,v15,green,intent,other1,other2,yearmovedin,priorres) 
+select councilupdated.pd, councilupdated.eno, councilupdated.firstname, councilupdated.surname, councilupdated.fulladdress, '%s'.street, councilupdated.address_1, councilupdated.address_2,councilupdated.address_3,councilupdated.address_4,councilupdated.address_5,councilupdated.address_6,councilupdated.address_7,councilupdated.subroad,councilupdated.road,
+'%s'.v12, '%s'.v14, '%s'.v15, '%s'.green, '%s'.intent, '%s'.other1, '%s'.other2, '%s'.yearmovedin, '%s'.priorres 
+from councilupdated 
+left outer join '%s' on councilupdated.firstname = '%s'.firstname and councilupdated.surname = '%s'.surname and councilupdated.address_1 = '%s'.address1 
+or councilupdated.firstname = '%s'.firstname and councilupdated.surname = '%s'.surname and UPPER(councilupdated.road) = UPPER('%s'.street)
+or councilupdated.firstname = '%s'.firstname and councilupdated.surname = '%s'.surname and UPPER(councilupdated.subroad) = UPPER('%s'.address3)
+or councilupdated.firstname = '%s'.firstname and councilupdated.surname = '%s'.surname and UPPER(councilupdated.subroad) = UPPER('%s'.address4)
+or councilupdated.firstname = '%s'.firstname and councilupdated.surname = '%s'.surname and UPPER(councilupdated.subroad) = UPPER('%s'.address5)
+or councilupdated.firstname = '%s'.firstname and councilupdated.surname = '%s'.surname and UPPER(councilupdated.subroad) = UPPER('%s'.address6);
+    ''' % (existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas, existingcanvas)
+    print tobedone
+    print "starting work (this can take a while, make a cup of tea or something.)"
+    cursor.execute( tobedone )
+    print "done the hard bit"
+    conn.commit()
+    
+
+
+# These lines set the year moved in as 2016 for new arrivals to 
+# the ward, and set the priorres status to 'no'.
+
+print "adding year of arrival as 2016 and setting priorres to 'no' for new arrivals"
+with sqlite3.connect( databaseused ) as conn:
+    cursor = conn.cursor()
+    tobedone = """update freshdata1 set yearmovedin = '2016' where priorres is not 'yes';"""
+    cursor.execute( tobedone )
+    tobedone = """update freshdata1 set priorres = 'no' where yearmovedin is '2016';"""
+    cursor.execute( tobedone )
+    tobedone = """delete from freshdata1 where rowid not in 
+(select min(rowid) from freshdata1 group by firstname, surname, address1);"""
+    cursor.execute( tobedone )
+    conn.commit()
+
+
+
 
 
 
